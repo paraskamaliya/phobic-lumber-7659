@@ -1,0 +1,10 @@
+.active {
+    text-decoration: underline;
+    color: #3A3A3A;
+    text-decoration-color: #486E00;
+}
+
+.default {
+    text-decoration: none;
+    color: black;
+}
