@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Link as ReactRouterLink } from "react-router-dom"
 import {
     Box, Link as ChakraLink, Image, Spacer, Stack, IconButton, Avatar, Button, AlertDialog,
@@ -18,6 +18,7 @@ function Navbar() {
     const { isAuth, logout } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
+    const navigate = useNavigate();
     return <Box bg={"green.50"}>
         <Stack direction={"row"} m={"auto"} align={"center"} w={"90%"} >
             <Box>
@@ -69,7 +70,10 @@ function Navbar() {
                                 <Button ref={cancelRef} onClick={onClose}>
                                     No
                                 </Button>
-                                <Button colorScheme='red' ml={3} onClick={logout}>
+                                <Button colorScheme='red' ml={3} onClick={() => {
+                                    logout()
+                                    navigate("/")
+                                }}>
                                     Yes
                                 </Button>
                             </AlertDialogFooter>
@@ -78,6 +82,6 @@ function Navbar() {
                 </Button>
             </Box>
         </Stack >
-    </Box>
+    </Box >
 }
 export default Navbar

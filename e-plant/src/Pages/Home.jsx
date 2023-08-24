@@ -1,9 +1,7 @@
 import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Grid, GridItem, Spacer, Card, CardBody, Link } from "@chakra-ui/react"
+import { Link as ReactRouterLink } from "react-router-dom"
 import { useEffect, useState } from "react"
-// import { Link } from "react-router-dom"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
-import { FiInstagram } from "react-icons/fi"
-import { FaTelegram } from "react-icons/fa"
 import Footer from "../Components/Footer"
 const Home = () => {
     const photos = ["https://www.ugaoo.com/cdn/shop/files/Venice12Planter-LightGrey_8bf35189-116d-4866-a064-7d7621a43fe3.jpg?v=1683362524&width=375", "https://www.ugaoo.com/cdn/shop/files/SpiroCeramicPot-White_725fdcf3-b24a-4710-a61e-e2d67af6deaf.jpg?v=1683029966&width=375", "https://www.ugaoo.com/cdn/shop/files/Aimage_3.jpg?v=1682523121&width=375", "https://www.ugaoo.com/cdn/shop/products/LagosPlanter-Grey_f26c8dee-c8ce-4e1a-bec7-86006f560c98.jpg?v=1680418283&width=375"]
@@ -169,8 +167,8 @@ const Home = () => {
                     <VStack w={["80%", "80%", "30%"]} textAlign={"left"} ml={["0px", "0px", "150px"]} size="3xl" align={"left"}>
                         <Heading color="#426800" size="2xl" >Create a green paradise right at home</Heading>
                         <Text color={"#3A3A3A"} mt={"2"} fontSize="l">20% of the profit goes to help the Armed Forces of INDIA</Text>
-                        <Button w={"fit-content"} backgroundColor="#426800" color={"white"} mt={"2"} width={"120px"}>
-                            <Link to={"/products"} href="/products">Products</Link>
+                        <Button w={"fit-content"} backgroundColor="#426800" color={"white"} mt={"2"} width={"120px"} >
+                            <Link as={ReactRouterLink} to="/products" _hover={{ textDecoration: "none" }}>Products</Link>
                         </Button>
                     </VStack>
                     <VStack w={["80%", "80%", "35%"]} h={500} position={"relative"} >
@@ -241,7 +239,7 @@ const Home = () => {
                     </Card>
                 </Stack>
                 <Button mt={10} backgroundColor={"#426800"} color={"white"} alignContent={"end"}>
-                    <Link to={"/products"} href="/products">See All</Link>
+                    <Link as={ReactRouterLink} to={"/products"} _hover={{ textDecoration: "none" }}>See All</Link>
                 </Button>
             </Box>
             <Box w={"80%"} h={"fit-content"} m={"auto"} mt={10}>
