@@ -4,22 +4,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Productcard from "../Components/ProductCard";
 import Footer from "../Components/Footer";
+import ErrorIndicator from "../Components/ErrorIndicator";
 
 const Products = () => {
     const [sortcri, setSortCri] = useState("");
     const [sortOrd, setSortOrd] = useState("");
     const [order, setOrder] = useState("");
+    const [query, setQuery] = useState("");
     const [productData, setProductData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(false);
-    let url = new URL ("https://64e37895bac46e480e78da47.mockapi.io/Products");
+    let url = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const fetchTheData = () => {
         setLoading(true);
-        if (sortcri !== "" && sortOrd !== ""){
+        if (sortcri !== "" && sortOrd !== "") {
             url.searchParams.append('sortBy', sortcri);
-            url.searchParams.append("order",sortOrd);
-            url.searchParams.append('sortBy','title')
-            url.searchParams.append("order",order);
+            url.searchParams.append("order", sortOrd);
+            url.searchParams.append('sortBy', 'title')
+            url.searchParams.append("order", order);
         }
         axios.get(url)
             .then((res) => {
@@ -41,7 +43,7 @@ const Products = () => {
         return <Spinner size={"xl"} />
     }
     if (err) {
-        return <Heading>Something went wrong, Please try again after some time.</Heading>
+        return <ErrorIndicator />
     }
     return (
         <Box pt={5} bg={"green.50"}>
@@ -64,7 +66,7 @@ const Products = () => {
                 </Select>
                 <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData}>Apply</Button>
             </Stack>
-            <SimpleGrid columns={["1", "2", "3"]} spacing='20px' w={"80%"} m={"auto"} mt={"5"}>
+            <SimpleGrid columns={["1", "1", "2", "3"]} spacing='20px' w={"80%"} m={"auto"} mt={"5"}>
                 {productData?.map((item) => {
                     return <Productcard {...item} key={item.id} />
                 })}
