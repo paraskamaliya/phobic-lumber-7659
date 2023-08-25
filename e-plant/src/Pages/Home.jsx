@@ -1,4 +1,4 @@
-import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Grid, GridItem, Spacer, Card, CardBody, Link } from "@chakra-ui/react"
+import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Card, CardBody, Link } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"

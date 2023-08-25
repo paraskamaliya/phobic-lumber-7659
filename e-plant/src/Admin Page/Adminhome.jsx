@@ -1,6 +1,7 @@
-import { Box, Heading, IconButton, Image, Spinner, Stack, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, ModalFooter, Button } from "@chakra-ui/react"
+import { Box, Heading, IconButton, Image, Spinner, Stack, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, FormLabel, Input, ModalFooter, Button, HStack, Link } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link as ReactRouterDom } from "react-router-dom";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons"
 import Pagination from "../Components/Pagination";
 import ErrorIndicator from "../Components/ErrorIndicator";
@@ -10,11 +11,13 @@ const Adminhome = () => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [editedImageLinks, setEditedImageLinks] = useState([]);
+    const limit = 10;
     const [totalData, setTotalData] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [editedProduct, setEditedProduct] = useState(null);
     const [err, setErr] = useState(false);
+
     let url = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const fetchTheData = () => {
         setLoading(true);
@@ -24,10 +27,10 @@ const Adminhome = () => {
             .then((res) => {
                 setProductData(res.data);
                 setLoading(false);
-                setErr("");
+                setErr(false);
             })
             .catch((err) => {
-                setErr(err)
+                setErr(true)
                 setProductData([]);
                 setLoading(false);
             })
@@ -101,15 +104,23 @@ const Adminhome = () => {
     }
     return <>
         <Box>
-            <Stack mt={10}>
-                <Heading color="#426800">Product Details</Heading>
-                <TableContainer w={"80%"} m={"auto"}>
+            <Link as={ReactRouterDom} to={"/admin/users"} textDecoration="none" _hover={{ textDecoration: "none" }}>
+                <Button mt={5} bg={"#426800"} color={"whiteAlpha.900"}>Show Users</Button>
+            </Link>
+            <Stack mt={5}>
+                <HStack justifyContent={"center"}>
+                    <Heading color="#426800">Product Details</Heading>
+                    <Link as={ReactRouterDom} to={"/admin/productform"} position={"absolute"} right={2} textDecoration="none" _hover={{ textDecoration: "none" }}>
+                        <Button backgroundColor={"#426800"} color={"white"}>Add Product</Button>
+                    </Link>
+                </HStack>
+                <TableContainer w={"100%"} m={"auto"}>
                     <Table variant='simple'>
                         <Thead bg={"green.50"} m={"auto"}>
                             <Tr>
                                 <Th>ID</Th>
                                 <Th>Image</Th>
-                                <Th>Name</Th>
+                                <Th>Title</Th>
                                 <Th isNumeric>Stock</Th>
                                 <Th>Category</Th>
                                 <Th>Rating</Th>
@@ -145,7 +156,7 @@ const Adminhome = () => {
                         </Tfoot>
                     </Table>
                 </TableContainer>
-                <Pagination totalData={totalData} handlePageChange={handlePageChange} page={page} />
+                <Pagination totalData={totalData} handlePageChange={handlePageChange} page={page} limit={limit} />
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} scrollBehavior={"inside"}>
                     <ModalOverlay />
                     <ModalContent>

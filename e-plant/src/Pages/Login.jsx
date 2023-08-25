@@ -5,14 +5,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const { isAuth, setIsAuth, login } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const toast = useToast();
     const navigate = useNavigate();
     const handleLogin = () => {
-        if (email == "admin" && password == "admin") {
+        if (email === "admin" && password === "admin") {
             navigate("/admin/home")
             login()
         } else {
