@@ -38,6 +38,18 @@ const Login = () => {
         setEmail("");
         setPassword("");
     }
+    const handleSignup = () => {
+        axios.post(`https://64e37895bac46e480e78da47.mockapi.io/Users`, {
+            name: name,
+            email: email,
+            password: password,
+            address: "",
+            recent: [],
+            cart: []
+        })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+    }
     return (<Tabs variant='soft-rounded' colorScheme='green' m={"auto"} w={"50%"} isFitted mt={10}>
         <TabList>
             <Tab>Login</Tab>
@@ -64,7 +76,7 @@ const Login = () => {
                 <FormControl mt={2}>
                     <Input value={password} type="password" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
                 </FormControl>
-                <Button mt={2} colorScheme="green">Login</Button>
+                <Button mt={2} colorScheme="green" onClick={handleSignup}>SignUp</Button>
             </TabPanel>
         </TabPanels>
     </Tabs>)

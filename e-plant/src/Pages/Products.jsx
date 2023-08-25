@@ -12,14 +12,14 @@ const Products = () => {
     const [productData, setProductData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(false);
-    let url = new URL ("https://64e37895bac46e480e78da47.mockapi.io/Products");
+    let url = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const fetchTheData = () => {
         setLoading(true);
-        if (sortcri !== "" && sortOrd !== ""){
+        if (sortcri !== "" && sortOrd !== "") {
             url.searchParams.append('sortBy', sortcri);
-            url.searchParams.append("order",sortOrd);
-            url.searchParams.append('sortBy','title')
-            url.searchParams.append("order",order);
+            url.searchParams.append("order", sortOrd);
+            url.searchParams.append('sortBy', 'title')
+            url.searchParams.append("order", order);
         }
         axios.get(url)
             .then((res) => {
