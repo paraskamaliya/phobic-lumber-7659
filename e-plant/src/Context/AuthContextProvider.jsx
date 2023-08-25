@@ -1,7 +1,9 @@
 import { createContext, useState } from "react";
 export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(
+        JSON.parse(localStorage.getItem("login")) || false
+    );
     const login = () => {
         setIsAuth(true);
         localStorage.setItem("login", JSON.stringify(true))

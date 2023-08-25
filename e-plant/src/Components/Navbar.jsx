@@ -22,6 +22,14 @@ function Navbar() {
     const handleLogout = () => {
         logout()
         onClose()
+        navigate("/")
+    }
+    let avatar;
+    let name;
+    if (isAuth) {
+        const data = JSON.parse(localStorage.getItem("user"))
+        avatar = data.avatar
+        name = data.name
     }
     return <Box bg={"green.50"}>
         <Stack direction={"row"} m={"auto"} align={"center"} w={"90%"} >
@@ -46,9 +54,11 @@ function Navbar() {
             <Box display={"flex"} gap={"20px"} alignItems={"center"}>
                 {isAuth ? (<>
                     <ChakraLink as={ReactRouterLink} to={"/profile"}>
-                        <Avatar name='Dan Abrahmov' src='https://bit.ly/broken-link' />
+                        <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                     </ChakraLink>
-                    <IconButton icon={<FaShoppingCart />} color="#486E00" fontSize='20px' size={"md"} />
+                    <ChakraLink as={ReactRouterLink} to={"/cart"}>
+                        <IconButton icon={<FaShoppingCart />} color="#486E00" fontSize='20px' size={"md"} />
+                    </ChakraLink>
                 </>
                 ) : null}
                 <Button bg={isAuth ? "red" : "#426800"} color={"white"} onClick={isAuth ? onOpen : undefined}>
