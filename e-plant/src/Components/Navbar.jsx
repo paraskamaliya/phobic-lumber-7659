@@ -18,14 +18,11 @@ function Navbar() {
     const { isAuth, logout } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
-<<<<<<<<< Temporary merge branch 1
     const navigate = useNavigate();
-=========
     const handleLogout = () => {
         logout()
         onClose()
     }
->>>>>>>>> Temporary merge branch 2
     return <Box bg={"green.50"}>
         <Stack direction={"row"} m={"auto"} align={"center"} w={"90%"} >
             <Box>
@@ -77,14 +74,7 @@ function Navbar() {
                                 <Button ref={cancelRef} onClick={onClose}>
                                     No
                                 </Button>
-<<<<<<<<< Temporary merge branch 1
-                                <Button colorScheme='red' ml={3} onClick={() => {
-                                    logout()
-                                    navigate("/")
-                                }}>
-=========
                                 <Button colorScheme='red' ml={3} onClick={handleLogout}>
->>>>>>>>> Temporary merge branch 2
                                     Yes
                                 </Button>
                             </AlertDialogFooter>
