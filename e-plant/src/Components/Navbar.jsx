@@ -18,6 +18,12 @@ function Navbar() {
     const { isAuth, logout } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
+
+    const handleLogout = () => {
+        logout()
+        onClose()
+    }
+
     const navigate = useNavigate();
     return <Box bg={"green.50"}>
         <Stack direction={"row"} m={"auto"} align={"center"} w={"90%"} >
@@ -70,10 +76,13 @@ function Navbar() {
                                 <Button ref={cancelRef} onClick={onClose}>
                                     No
                                 </Button>
+                                <Button colorScheme='red' ml={3} onClick={handleLogout}>
+
                                 <Button colorScheme='red' ml={3} onClick={() => {
                                     logout()
                                     navigate("/")
                                 }}>
+
                                     Yes
                                 </Button>
                             </AlertDialogFooter>
