@@ -70,8 +70,9 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
             if (response.status === 200) {
                 localStorage.setItem("user", JSON.stringify({ ...user, recent: updatedRecent }));
             }
-        } catch (error) {
-            console.error("Error updating the cart:", error);
+        }
+        catch {
+            console.log("Error")
         }
     };
 
@@ -80,10 +81,10 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
         const existingProduct = user.recent.find(product => product.id === productId);
 
         if (existingProduct) {
-            const updatedCart = user.recent.map(product =>
+            const updatedRecent = user.recent.map(product =>
                 product.id === productId ? { ...product, quantity: product.quantity + quantity } : product
             );
-            updateTheCart(updatedCart);
+            updateTheRecent(updatedRecent);
             navigate(`/products/${productId}`)
         } else {
             const product = {
