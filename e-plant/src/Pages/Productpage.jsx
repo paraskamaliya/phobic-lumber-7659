@@ -35,10 +35,9 @@ const Productpage = () => {
             setEstiDeli("Please Enter Pin Code")
         }
     }
-    const updateTheCart = async (product) => {
+    const updateTheCart = async (updatedCart) => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
-            const updatedCart = [...user.cart, product];
             const response = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${user.id}`, {
                 cart: updatedCart
             });
@@ -46,14 +45,14 @@ const Productpage = () => {
             if (response.status === 200) {
                 localStorage.setItem("user", JSON.stringify({ ...user, cart: updatedCart }));
                 toast({
-                    title: 'Product added to Cart',
+                    title: 'Cart updated successfully',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
                 });
             } else {
                 toast({
-                    title: 'Product is not added into the Cart',
+                    title: 'Error updating the cart',
                     status: 'error',
                     duration: 3000,
                     isClosable: true,
@@ -65,9 +64,29 @@ const Productpage = () => {
     };
 
     const handleClick = (productId, quantity) => {
-        const product = { id: productId, quantity: quantity };
-        updateTheCart(product);
+        const user = JSON.parse(localStorage.getItem("user"));
+        const existingProduct = user.cart.find(product => product.id === productId);
+
+        if (existingProduct) {
+            const updatedCart = user.cart.map(product =>
+                product.id === productId ? { ...product, quantity: product.quantity + quantity } : product
+            );
+            updateTheCart(updatedCart);
+        } else {
+            const product = {
+                id: productId,
+                image: productData.images[0],
+                title: productData.title,
+                category: productData.category,
+                rating: productData.rating,
+                price: productData.price,
+                quantity: quantity
+            };
+            const updatedCart = [...user.cart, product];
+            updateTheCart(updatedCart);
+        }
     };
+
 
     useEffect(() => {
         fetchTheProduct(id)

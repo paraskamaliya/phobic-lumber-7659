@@ -1,80 +1,110 @@
-import { Box, Heading, IconButton, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, IconButton, Image, Input, Spacer, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { DeleteIcon } from "@chakra-ui/icons";
-
+import { AddIcon, DeleteIcon, MinusIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 const Cartpage = () => {
     const [cartData, setCartData] = useState([]);
-    let products = [];
+    const [id, setId] = useState();
+    const navigate = useNavigate();
     const fetchCartData = () => {
         const data = JSON.parse(localStorage.getItem("user"))
         setCartData(data.cart);
+        setId(data.id);
     }
-    const cartProduct = () => {
-        products = [];
-        cartData.map((item) => {
-            axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Products/${item.id}`)
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err))
-        })
-    }
-    console.log(products)
+    const increaseQuantity = (productId) => {
+        const updatedCart = cartData.map((product) =>
+            product.id === productId ? { ...product, quantity: product.quantity + 1 } : product
+        );
+        setCartData(updatedCart);
+        calculateTotalAmount();
+        updateCartAPI(updatedCart);
+    };
+    const deleteProduct = async (productId) => {
+        const updatedCart = cartData.filter(product => product.id !== productId);
+        setCartData(updatedCart);
+        calculateTotalAmount();
+        updateCartAPI(updatedCart);
+    };
+    const updateCartAPI = async (updatedCart) => {
+        try {
+            const data = JSON.parse(localStorage.getItem("user"));
+            data.cart = updatedCart;
 
-    // const fetchCartAndProducts = async () => {
-    //     const user = JSON.parse(localStorage.getItem("user"));
-    //     const id = user.id;
+            const response = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${id}`, data);
 
-    //     try {
-    //         const cartResponse = await axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Users/${id}`);
-    //         setCartData(cartResponse.data);
+            localStorage.setItem("user", JSON.stringify(data));
 
-    //         const productRequests = cartResponse.data.cart.map((productId) =>
-    //             axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Products/${productId.id}`)
-    //         );
-    //         const productResponses = await Promise.all(productRequests);
-    //         const fetchedProducts = productResponses.map((response) => response.data);
-    //         setProducts(fetchedProducts);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+        } catch (error) {
+            console.error("Error updating cart:", error);
+        }
+    };
+    const decreaseQuantity = (productId) => {
+        const updatedCart = cartData.map((product) =>
+            product.id === productId && product.quantity > 1 ? { ...product, quantity: product.quantity - 1 } : product
+        );
+        setCartData(updatedCart);
+        calculateTotalAmount();
+        updateCartAPI(updatedCart);
+    };
+    const calculateTotalQuantity = () => {
+        return cartData.reduce((total, product) => total + product.quantity, 0);
+    };
+    const calculateTotalAmount = () => {
+        let amount = cartData.reduce((total, product) => total + product.quantity * product.price, 0);
+        localStorage.setItem("amount", JSON.stringify(amount))
+        return amount;
+    };
+
     useEffect(() => {
         fetchCartData();
-        cartProduct();
+        let amount = calculateTotalAmount();
     }, []);
+    if (cartData.length == 0) {
+        return <Heading as={"h1"} color={"#426800"} mt={7}>Oops! Your cart is empty.</Heading>
+    }
     return <>
-        <Box>
+        <Box mt={5}>
             <Heading color={"#426800"}>Cart Page</Heading>
             <TableContainer>
-                <Table>
+                <Table mt={5}>
                     <Thead>
-                        <Tr>
-                            <Th>ID</Th>
-                            <Th>Image</Th>
-                            <Th>Title</Th>
-                            <Th isNumeric>Quantity</Th>
-                            <Th>Category</Th>
-                            <Th>Rating</Th>
-                            <Th>Price</Th>
-                            <Th>Delete</Th>
+                        <Tr bg={"green.50"}>
+                            <Th textAlign={"center"}>ID</Th>
+                            <Th textAlign={"center"}>Image</Th>
+                            <Th textAlign={"center"}>Title</Th>
+                            <Th textAlign={"center"}>Quantity</Th>
+                            <Th textAlign={"center"}>Category</Th>
+                            <Th textAlign={"center"}>Rating</Th>
+                            <Th textAlign={"center"}>Price</Th>
+                            <Th textAlign={"center"}>Delete</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {products.map((product) => (
-                            <Tr >
-                                <Td>{product.id}</Td>
-                                <Td>
-                                    <Image src={product.images[0]} alt={product.title} h={16} w={16} />
+                        {cartData.map((product) => (
+                            <Tr textAlign={"center"} alignItems={"center"} key={product.id}>
+                                <Td textAlign={"center"}>{product.id}</Td>
+                                <Td justifySelf={"center"}>
+                                    <Image m="auto" src={product.image} alt={product.title} h={20} w={20} />
                                 </Td>
-                                <Td>{product.title}</Td>
-                                {/* ... */}
-                                <Td>
+                                <Td textAlign={"center"}>{product.title}</Td>
+                                <Td >
+                                    <HStack justify={"center"}>
+                                        <IconButton isDisabled={product.quantity === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => decreaseQuantity(product.id)} />
+                                        <Text>{product.quantity}</Text>
+                                        <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => increaseQuantity(product.id)} />
+                                    </HStack>
+                                </Td>
+                                <Td textAlign={"center"}>{product.category}</Td>
+                                <Td textAlign={"center"}>{product.rating}⭐</Td>
+                                <Td textAlign={"center"}>₹{product.price}</Td>
+                                <Td textAlign={"center"}>
                                     <IconButton
                                         aria-label="Remove from Cart"
                                         icon={<DeleteIcon />}
                                         colorScheme="red"
                                         size="sm"
-                                    // onClick={() => removeFromCart(product.id)}
+                                        onClick={() => deleteProduct(product.id)}
                                     />
                                 </Td>
                             </Tr>
@@ -82,7 +112,16 @@ const Cartpage = () => {
                     </Tbody>
                 </Table>
             </TableContainer>
+            <Box>
+                <Stack direction={["column", "column", "row"]} m={"auto"} w={"80%"} gap={"20%"}>
+                    <Box m={"auto"} w={["80%", "80%", "50%"]}>
+                        <Text fontSize={"2xl"}>Total Quantity: {calculateTotalQuantity()}</Text>
+                        <Text fontSize={"2xl"}>Total Amount: ₹{calculateTotalAmount()}</Text>
+                    </Box>
+                </Stack>
+            </Box>
         </Box>
+        <Button bg={"#426800"} color={"white"} onClick={() => { navigate("/payment") }}>Place Order</Button>
     </>
 }
 export default Cartpage

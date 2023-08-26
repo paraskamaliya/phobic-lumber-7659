@@ -10,6 +10,7 @@ import AdminUsers from "../Admin Page/AdminUsers";
 import ProductForm from "../Admin Page/ProductForm";
 import Blog from "../Pages/Blog";
 import Profile from "../Pages/Profile";
+import Checkout from "../Pages/Checkout";
 function Allroutes() {
     return <Routes>
         <Route path="/" element={<Home />} />
@@ -23,6 +24,7 @@ function Allroutes() {
         <Route path="/admin/productform" element={<ProductForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/payment" element={<Checkout />} />
     </Routes>
 }
 export default Allroutes;

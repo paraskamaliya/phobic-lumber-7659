@@ -12,20 +12,34 @@ import {
 } from '@chakra-ui/react'
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from "./Navbar.module.css"
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 function Navbar() {
     const { isAuth, logout } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
     const navigate = useNavigate();
+    const [cartData, setCartData] = useState([]);
+    const fetchCartData = () => {
+        const data = JSON.parse(localStorage.getItem("user"))
+        setCartData(data.cart);
+        calculateTotalQuantity();
+    }
+    const calculateTotalQuantity = () => {
+        return cartData.reduce((total, product) => total + product.quantity, 0);
+
+    };
     const handleLogout = () => {
         logout()
         onClose()
         navigate("/")
+        localStorage.setItem("user", JSON.stringify(""));
     }
     let avatar;
     let name;
+    useEffect(() => {
+        fetchCartData();
+    }, [])
     if (isAuth) {
         const data = JSON.parse(localStorage.getItem("user"))
         avatar = data.avatar
@@ -57,7 +71,7 @@ function Navbar() {
                         <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                     </ChakraLink>
                     <ChakraLink as={ReactRouterLink} to={"/cart"}>
-                        <IconButton icon={<FaShoppingCart />} color="#486E00" fontSize='20px' size={"md"} />
+                        <Button leftIcon={<FaShoppingCart />} >{calculateTotalQuantity()}</Button>
                     </ChakraLink>
                 </>
                 ) : null}

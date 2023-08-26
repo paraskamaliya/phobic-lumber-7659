@@ -19,7 +19,7 @@ const ProductForm = () => {
     const handleChange = (e) => {
         setNewData({
             ...newData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.type === "number" ? +(e.target.value) : e.target.value
         })
     }
     const handleClick = () => {
@@ -65,7 +65,7 @@ const ProductForm = () => {
             <VStack w={"60%"} m={"auto"} mt={5}>
                 <Input placeholder="Enter Title of Product" value={newData.title} name="title" onChange={(e) => handleChange(e)} />
 
-                <Input placeholder="Enter Price of Product" value={newData.price} name="price" onChange={(e) => handleChange(e)} />
+                <Input placeholder="Enter Price of Product" value={newData.price} type="number" name="price" onChange={(e) => handleChange(e)} />
 
                 <Input placeholder="Enter Stock of Product" value={newData.stock} name="stock" onChange={(e) => handleChange(e)} />
 

@@ -9,6 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
     const toast = useToast();
     const navigate = useNavigate();
     const handleLogin = () => {
@@ -49,11 +50,30 @@ const Login = () => {
             name: name,
             email: email,
             password: password,
-            address: "",
+            address: address,
             recent: [],
             cart: []
         })
-            .then((res) => console.log(res))
+            .then((res) => {
+                if (res.status) {
+                    toast({
+                        title: 'Account is Created',
+                        description: "We've created your account, you can login.",
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                }
+                else {
+                    toast({
+                        title: 'Account is not created',
+                        description: "We are facing some technical issue, Please try again after some time.",
+                        status: 'error',
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                }
+            })
             .catch((err) => console.log(err))
     }
     return (<Tabs variant='soft-rounded' colorScheme='green' m={"auto"} w={"50%"} isFitted mt={10}>
@@ -81,6 +101,9 @@ const Login = () => {
                 </FormControl>
                 <FormControl mt={2}>
                     <Input value={password} type="password" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
+                </FormControl>
+                <FormControl mt={2}>
+                    <Input value={address} type="text" name="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter Address" />
                 </FormControl>
                 <Button mt={2} colorScheme="green" onClick={handleSignup}>SignUp</Button>
             </TabPanel>
