@@ -1,26 +1,36 @@
 import React, { useContext } from "react";
-import { Card, CardBody, CardFooter, Link, Image, Text, Button } from "@chakra-ui/react";
+import { Card, CardBody, CardFooter, Link, Image, Text, Button, useToast } from "@chakra-ui/react";
 import { Link as ReactRouterDom, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 import axios from "axios";
 
-const ProductCard = ({ images, title, rating, price, id, popular }) => {
+const ProductCard = ({ images, title, rating, price, id, popular, category }) => {
     const { isAuth } = useContext(AuthContext);
     const navigate = useNavigate();
+    const toast = useToast();
 
-    const updateTheCart = async (product) => {
+    const updateTheCart = async (updatedCart) => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
-            const updatedCart = [...user.cart, product];
             const response = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${user.id}`, {
                 cart: updatedCart
             });
 
             if (response.status === 200) {
                 localStorage.setItem("user", JSON.stringify({ ...user, cart: updatedCart }));
-                console.log("Cart updated successfully.");
+                toast({
+                    title: 'Cart updated successfully',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
             } else {
-                console.error("Failed to update cart.");
+                toast({
+                    title: 'Error updating the cart',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                });
             }
         } catch (error) {
             console.error("Error updating the cart:", error);
@@ -28,35 +38,66 @@ const ProductCard = ({ images, title, rating, price, id, popular }) => {
     };
 
     const handleClick = (productId, quantity) => {
-        const product = { id: productId, quantity: quantity };
-        updateTheCart(product);
-    };
+        const user = JSON.parse(localStorage.getItem("user"));
+        const existingProduct = user.cart.find(product => product.id === productId);
 
-    const updateTherecent = async (productId) => {
-        try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            const updatedRecent = [...user.recent, productId];
-            const response = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${user.id}`, {
-                recent: updatedRecent
-            });
-
-            if (response.status === 200) {
-                localStorage.setItem("user", JSON.stringify({ ...user, recent: updatedRecent }));
-                console.log("Recent updated successfully.");
-            } else {
-                console.error("Failed to update Recent.");
-            }
-        } catch (error) {
-            console.error("Error updating the recent:", error);
+        if (existingProduct) {
+            const updatedCart = user.cart.map(product =>
+                product.id === productId ? { ...product, quantity: product.quantity + quantity } : product
+            );
+            updateTheCart(updatedCart);
+        } else {
+            const product = {
+                id: productId,
+                image: images[0],
+                title: title,
+                category: category,
+                rating: rating,
+                price: price,
+                quantity: quantity
+            };
+            const updatedCart = [...user.cart, product];
+            updateTheCart(updatedCart);
         }
     };
 
-    const handlerecent = (productId) => {
-        if (!isAuth) {
-            navigate("/login");
-        } else {
+    const updateTheRecent = async (updatedRecent) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const response = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${user.id}`, {
+                recent: updatedRecent
+            });
+            if (response.status === 200) {
+                localStorage.setItem("user", JSON.stringify({ ...user, recent: updatedRecent }));
+            }
+        } catch (error) {
+            console.error("Error updating the cart:", error);
+        }
+    };
+
+    const handlerecent = (productId, quantity) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const existingProduct = user.recent.find(product => product.id === productId);
+
+        if (existingProduct) {
+            const updatedCart = user.recent.map(product =>
+                product.id === productId ? { ...product, quantity: product.quantity + quantity } : product
+            );
+            updateTheCart(updatedCart);
             navigate(`/products/${productId}`)
-            updateTherecent(productId);
+        } else {
+            const product = {
+                id: productId,
+                image: images[0],
+                title: title,
+                category: category,
+                rating: rating,
+                price: price,
+                quantity: quantity
+            };
+            const updatedRecent = [...user.recent, product];
+            updateTheRecent(updatedRecent);
+            navigate(`/products/${productId}`)
         }
     };
 
