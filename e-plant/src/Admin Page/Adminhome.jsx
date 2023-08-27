@@ -108,12 +108,12 @@ const Adminhome = () => {
                 <Button mt={5} bg={"#426800"} color={"whiteAlpha.900"}>Show Users</Button>
             </Link>
             <Stack mt={5}>
-                <HStack justifyContent={"center"}>
+                <Stack justifyContent={"center"} direction={["column", "column", 'row']}>
                     <Heading color="#426800">Product Details</Heading>
-                    <Link as={ReactRouterDom} to={"/admin/productform"} position={"absolute"} right={2} textDecoration="none" _hover={{ textDecoration: "none" }}>
+                    <Link as={ReactRouterDom} to={"/admin/productform"} position={["relative", "relative", "absolute"]} right={2} textDecoration="none" _hover={{ textDecoration: "none" }}>
                         <Button backgroundColor={"#426800"} color={"white"}>Add Product</Button>
                     </Link>
-                </HStack>
+                </Stack>
                 <TableContainer w={"100%"} m={"auto"}>
                     <Table variant='simple'>
                         <Thead bg={"green.50"} m={"auto"}>
