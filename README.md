@@ -43,3 +43,10 @@ E-plant is basically E-Commerce which allows user to buy Plants from online stor
 ```
   GET https://64b63253df0839c97e151a61.mockapi.io/api/admin/users
 ```
+
+## Feedback
+
+If you have any Feedback, Please reach out to us at paraskamaliya5@gmail.com
+
+## Author
+[Paras Kamaliya](https://github.com/paraskamaliya)
