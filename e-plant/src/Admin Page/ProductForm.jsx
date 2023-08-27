@@ -112,60 +112,54 @@ const ProductForm = () => {
                     }}
                 />
 
-                <Input placeholder="Enter 3st Image link of Product" isRequired value={newData.images[2]} onChange={(e) => {
+                <Input placeholder="Enter 3st Image link of Product" focusBorderColor="#426800" isRequired value={newData.images[2]} onChange={(e) => {
                     const updatedImages = [...newData.images];
                     updatedImages[2] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         images: updatedImages
                     });
                 }} />
 
-                <Input placeholder="Enter 4st Image link of Product" isRequired value={newData.images[3]} onChange={(e) => {
+                <Input placeholder="Enter 4st Image link of Product" focusBorderColor="#426800" isRequired value={newData.images[3]} onChange={(e) => {
                     const updatedImages = [...newData.images];
                     updatedImages[3] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         images: updatedImages
                     });
                 }} />
 
-                <Input placeholder="Enter 1st line of Box content Product" isRequired value={newData.boxContent[0]} onChange={(e) => {
+                <Input placeholder="Enter 1st line of Box content Product" focusBorderColor="#426800" isRequired value={newData.boxContent[0]} onChange={(e) => {
                     const updatedBoxContent = [...newData.boxContent];
                     updatedBoxContent[0] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         boxContent: updatedBoxContent
                     });
                 }} />
 
-                <Input placeholder="Enter 2st line of Box content Product" isRequired value={newData.boxContent[1]} onChange={(e) => {
+                <Input placeholder="Enter 2st line of Box content Product" focusBorderColor="#426800" isRequired value={newData.boxContent[1]} onChange={(e) => {
                     const updatedBoxContent = [...newData.boxContent];
                     updatedBoxContent[1] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         boxContent: updatedBoxContent
                     });
                 }} />
 
-                <Input placeholder="Enter 3st line of Box content Product" isRequired value={newData.boxContent[2]} onChange={(e) => {
+                <Input placeholder="Enter 3st line of Box content Product" focusBorderColor="#426800" isRequired value={newData.boxContent[2]} onChange={(e) => {
                     const updatedBoxContent = [...newData.boxContent];
                     updatedBoxContent[2] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         boxContent: updatedBoxContent
                     });
                 }} />
 
-                <Input placeholder="Enter 4st line of Box content Product" isRequired value={newData.boxContent[3]} onChange={(e) => {
+                <Input placeholder="Enter 4st line of Box content Product" focusBorderColor="#426800" isRequired value={newData.boxContent[3]} onChange={(e) => {
                     const updatedBoxContent = [...newData.boxContent];
                     updatedBoxContent[3] = e.target.value;
-                    focusBorderColor="#426800"
                     setNewData({
                         ...newData,
                         boxContent: updatedBoxContent
