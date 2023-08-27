@@ -13,3 +13,18 @@ E-plant is basically E-Commerce which allows user to buy Plants from online stor
 **Front-End:** React.js/Chakra UI
 
 **Back-End [API] :** Mock API | Javascript
+
+## Features
+
+**User Page**
+- Login & SignUp
+- See Popular Products
+- Add and delete products from cart
+- Update Profile
+- See recent visited products
+- Image Slideshow
+- Responsive Layout
+
+**Admin Page**
+- Add & Update & Delete Product Data
+- Add & Delete User Data
