@@ -1,8 +1,8 @@
-import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from "@chakra-ui/react"
+import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import { MinusIcon, AddIcon } from "@chakra-ui/icons"
+import { MinusIcon, AddIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import Footer from "../Components/Footer";
 
 const Productpage = () => {
@@ -13,8 +13,19 @@ const Productpage = () => {
     const [qty, setQty] = useState(1);
     const [estiDeli, setEstiDeli] = useState("");
     const [pin, setPin] = useState("");
+    const [userData, setUserData] = useState([]);
     const toast = useToast();
+    const [startIndex, setStartIndex] = useState(0);
 
+    const handleNext = () => {
+        const nextIndex = startIndex + 1;
+        setStartIndex(Math.min(nextIndex, userData.recent.length - 1));
+    };
+
+    const handlePrev = () => {
+        const prevIndex = startIndex - 1;
+        setStartIndex(Math.max(prevIndex, 0));
+    };
     const fetchTheProduct = (id) => {
         setLoading(true);
         axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`)
@@ -86,16 +97,19 @@ const Productpage = () => {
             updateTheCart(updatedCart);
         }
     };
-
-
+    const getTheUserData = () => {
+        const data = JSON.parse(localStorage.getItem("user"));
+        setUserData(data);
+    }
     useEffect(() => {
-        fetchTheProduct(id)
+        fetchTheProduct(id);
+        getTheUserData();
     }, [id])
     if (loading) {
         return <Spinner />
     }
     return <>
-        <Box mt={10}>
+        <Box pt={10} >
             <Stack w={"80%"} m={"auto"} direction={["column", "column", "row"]} gap={10} mb={5}>
                 <Box w={["100%", "100%", "50%"]}>
                     <Stack direction={"column"} alignItems={"center"} >
@@ -172,7 +186,8 @@ const Productpage = () => {
                     </Stack>
                 </Box>
             )}
-            <Box w={"60%"} m={"auto"} mt={5}>
+            <hr />
+            <Box w={"60%"} m={"auto"} p={7}>
                 <Heading color={"#426800"} mb={3}>Tips For Care</Heading>
                 <Accordion allowMultiple>
                     <AccordionItem>
@@ -239,10 +254,33 @@ const Productpage = () => {
                             The plant needs a knowing eye of a gardener to understand what it needs. Fairly easy to grow if you take care of their set of requirements.
                         </AccordionPanel>
                     </AccordionItem>
-
-
                 </Accordion>
             </Box>
+            <hr />
+            {userData?.recent?.length == 0 ? "There is no visited Product" :
+                <Box w={"90%"} m={"auto"} mt={10}>
+                    <Stack direction={"row"}>
+                        <Heading textAlign={"left"} color={"#426800"}>Recent Visited Products</Heading>
+                        <Spacer />
+                        <HStack>
+                            <IconButton icon={<ChevronLeftIcon />} backgroundColor={"#426800"} color={"white"} onClick={handlePrev} isDisabled={startIndex === 0} />
+                            <IconButton icon={<ChevronRightIcon />} backgroundColor={"#426800"} color={"white"} onClick={handleNext} isDisabled={startIndex + 5 >= userData.recent?.length} />
+                        </HStack>
+                    </Stack>
+                    <Box overflowX="hidden" overflowY="auto" mt={5}>
+                        <Stack direction={"row"} gap={"2%"}>
+                            {userData?.recent?.length > 0 && userData?.recent.slice(startIndex, startIndex + 5).map((item) => {
+                                return <Box key={item.id} w={"20%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
+                                    <Image src={item.image} w={300} h={250} borderRadius={"15px 15px 0px 0px"} />
+                                    <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
+                                    <Text fontSize={"md"}>₹{item.price}</Text>
+                                    <Text>{item.rating}⭐</Text>
+                                </Box>
+                            })}
+                        </Stack>
+                    </Box>
+                </Box>
+            }
             <Footer />
         </Box>
     </>

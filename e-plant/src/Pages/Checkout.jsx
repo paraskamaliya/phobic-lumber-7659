@@ -1,4 +1,5 @@
 import { Box, Button, Card, FormControl, FormHelperText, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, PinInput, PinInputField, Stack, Text, HStack, useToast, Select, ModalCloseButton } from "@chakra-ui/react"
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Checkout = () => {
@@ -55,6 +56,12 @@ const Checkout = () => {
                 isClosable: true
             });
             navigate("/")
+            const data = JSON.parse(localStorage.getItem("user"))
+            data.cart = [];
+            localStorage.setItem("user", JSON.stringify(data));
+            axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${data.id}`,{
+                cart:data.cart
+            });
         }
         else {
             toast({

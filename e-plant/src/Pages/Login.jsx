@@ -16,6 +16,7 @@ const Login = () => {
         if (email === "admin" && password === "admin") {
             navigate("/admin/home")
             login()
+            localStorage.setItem("login", JSON.stringify(false));
         } else {
             axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Users?email=${email}`)
                 .then((res) => {

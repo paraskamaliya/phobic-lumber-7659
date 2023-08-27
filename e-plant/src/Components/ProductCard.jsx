@@ -38,8 +38,12 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
     };
 
     const handleClick = (productId, quantity) => {
+        if (!isAuth) {
+            navigate("/login");
+            return;
+        }
         const user = JSON.parse(localStorage.getItem("user"));
-        const existingProduct = user.cart.find(product => product.id === productId);
+        const existingProduct = user.cart?.find(product => product.id === productId);
 
         if (existingProduct) {
             const updatedCart = user.cart.map(product =>
@@ -77,14 +81,14 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
     };
 
     const handlerecent = (productId, quantity) => {
+        if (!isAuth) {
+            navigate("/login");
+            return;
+        }
         const user = JSON.parse(localStorage.getItem("user"));
-        const existingProduct = user.recent.find(product => product.id === productId);
+        const existingProduct = user.recent?.find(product => product.id === productId);
 
         if (existingProduct) {
-            const updatedRecent = user.recent.map(product =>
-                product.id === productId ? { ...product, quantity: product.quantity + quantity } : product
-            );
-            updateTheRecent(updatedRecent);
             navigate(`/products/${productId}`)
         } else {
             const product = {
@@ -94,9 +98,9 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
                 category: category,
                 rating: rating,
                 price: price,
-                quantity: quantity
+                quantity: 1
             };
-            const updatedRecent = [...user.recent, product];
+            const updatedRecent = [product, ...user.recent];
             updateTheRecent(updatedRecent);
             navigate(`/products/${productId}`)
         }
