@@ -37,9 +37,6 @@ function Navbar() {
     }
     let avatar;
     let name;
-    const handleUpdate = () => {
-        calculateTotalQuantity();
-    }
     useEffect(() => {
         fetchCartData();
     }, [])
@@ -48,8 +45,8 @@ function Navbar() {
         avatar = data.avatar
         name = data.name
     }
-    return <Box bg={"green.50"}>
-        <Stack direction={"row"} m={"auto"} align={"center"} w={"90%"} >
+    return <Box backgroundColor={"#FFF6F4"}>
+        <Stack direction={["column", "column", "row"]} m={"auto"} align={"center"} w={"90%"} >
             <Box>
                 <ChakraLink as={ReactRouterLink} to='/'>
                     <Image src="https://i.postimg.cc/VNJc4J4q/E-Plant-removebg-preview1.png" w={"80px"} h={"80px"} />
@@ -63,9 +60,9 @@ function Navbar() {
                 <NavLink to={"/products"} className={({ isActive }) => {
                     return isActive ? styles.active : styles.default
                 }}>Products</NavLink>
-                <NavLink to={"/blog"} className={({ isActive }) => {
+                {/* <NavLink to={"/blog"} className={({ isActive }) => {
                     return isActive ? styles.active : styles.default
-                }}>Blog</NavLink>
+                }}>Blog</NavLink> */}
             </Box>
             <Spacer />
             <Box display={"flex"} gap={"20px"} alignItems={"center"}>
@@ -74,7 +71,7 @@ function Navbar() {
                         <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                     </ChakraLink>
                     <ChakraLink as={ReactRouterLink} to={"/cart"}>
-                        <Button leftIcon={<FaShoppingCart />} >{calculateTotalQuantity() || 0}</Button>
+                        <Button leftIcon={<FaShoppingCart />} bg={"#426800"} color={"white"}>{calculateTotalQuantity() || 0}</Button>
                     </ChakraLink>
                 </>
                 ) : null}
