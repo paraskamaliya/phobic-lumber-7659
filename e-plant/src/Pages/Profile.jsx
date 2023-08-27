@@ -60,6 +60,7 @@ const Profile = () => {
                             <FormLabel>Name</FormLabel>
                             <Input
                                 value={editedData.name}
+                                focusBorderColor="#426800"
                                 onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
                             />
                         </FormControl>
@@ -67,18 +68,20 @@ const Profile = () => {
                             <FormLabel>Email</FormLabel>
                             <Input
                                 value={editedData.email}
+                                focusBorderColor="#426800"
                                 onChange={(e) => setEditedData({ ...editedData, email: e.target.value })}
                             />
                         </FormControl>
                         <FormControl>
                             <FormLabel>Profile Picture</FormLabel>
-                            <input type="file" accept="image/*" onChange={handleFileChange} />
+                            <input type="file" accept="image/*" color="#426800" onChange={handleFileChange} focusBorderColor="#426800"/>
                             {editedData.avatar && <Avatar name={editedData.name} src={editedData.avatar} size="xl" mt={3} />}
                         </FormControl>
                         <FormControl mt={3}>
                             <FormLabel>Address</FormLabel>
                             <Input
                                 value={editedData.address}
+                                focusBorderColor="#426800"
                                 onChange={(e) => setEditedData({ ...editedData, address: e.target.value })}
                             />
                         </FormControl>
@@ -86,6 +89,7 @@ const Profile = () => {
                             <FormLabel>Password</FormLabel>
                             <Input
                                 value={editedData.password}
+                                focusBorderColor="#426800"
                                 onChange={(e) => setEditedData({ ...editedData, password: e.target.value })}
                             />
                         </FormControl>

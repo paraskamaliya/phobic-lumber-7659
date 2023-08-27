@@ -59,8 +59,8 @@ const Checkout = () => {
             const data = JSON.parse(localStorage.getItem("user"))
             data.cart = [];
             localStorage.setItem("user", JSON.stringify(data));
-            axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${data.id}`,{
-                cart:data.cart
+            axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Users/${data.id}`, {
+                cart: data.cart
             });
         }
         else {
@@ -85,7 +85,7 @@ const Checkout = () => {
         </Heading>
         <Stack w={"80%"} m={"auto"} direction={"row"} mb={5}>
             <FormControl w={"80%"} m={"auto"} >
-                <Input placeholder="Enter Coupon Code" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} borderColor={"#426800"} />
+                <Input placeholder="Enter Coupon Code" focusBorderColor="#426800" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} borderColor={"#426800"} />
                 <FormHelperText>Please be carefull while entering coupon code, it will be not changed.</FormHelperText>
                 <Button bg={"#426800"} color={"white"} onClick={handleCouponCode}>Apply Coupon</Button>
             </FormControl>
@@ -107,7 +107,7 @@ const Checkout = () => {
                 <ModalCloseButton />
                 <ModalBody>
                     <form>
-                        <Select placeholder="Select Card Type" m={1} value={cardSel} onChange={(e) => setCardSel(e.target.value)}>
+                        <Select placeholder="Select Card Type" focusBorderColor="#426800" m={1} value={cardSel} onChange={(e) => setCardSel(e.target.value)}>
                             <option value="credit">Credit Card</option>
                             <option value="debit">Debit Card</option>
                         </Select >
@@ -120,6 +120,7 @@ const Checkout = () => {
                             pattern="[0-9]{16}"
                             title="Please enter a 16-digit card number."
                             value={cardnum}
+                            focusBorderColor="#426800"
                             onChange={(e) => setCardNum(e.target.value)} />
                         <Button m={1} bg={"#426800"} color={"white"} onClick={handleConfirm}>Confirm Order</Button>
                     </form>
