@@ -22,11 +22,11 @@ function Navbar() {
     const [cartData, setCartData] = useState([]);
     const fetchCartData = () => {
         const data = JSON.parse(localStorage.getItem("user"))
-        setCartData(data.cart);
+        setCartData(data?.cart);
         calculateTotalQuantity();
     }
     const calculateTotalQuantity = () => {
-        return cartData.reduce((total, product) => total + product.quantity, 0);
+        return cartData?.reduce((total, product) => total + product.quantity, 0);
 
     };
     const handleLogout = () => {
@@ -37,6 +37,9 @@ function Navbar() {
     }
     let avatar;
     let name;
+    const handleUpdate = () => {
+        calculateTotalQuantity();
+    }
     useEffect(() => {
         fetchCartData();
     }, [])

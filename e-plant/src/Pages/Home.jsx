@@ -161,7 +161,7 @@ const Home = () => {
         };
     }, [currPhoto])
     return (
-        <Box pt={2} bg={"green.50"}>
+        <Box pt={2} >
             <Box w={"100%"}>
                 <Stack direction={["column", "column", "row"]} align={"center"} justifyContent={"space-evenly"}>
                     <VStack w={["80%", "80%", "30%"]} textAlign={"left"} ml={["0px", "0px", "150px"]} size="3xl" align={"left"}>

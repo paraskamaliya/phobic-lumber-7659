@@ -22,21 +22,18 @@ const Products = () => {
         setLoading(true);
         if (query !== "") {
             url.searchParams.append('title', query)
-            url.searchParams.append("page", 1);
-            url.searchParams.append('limit', 12);
+            setCurrPage(1);
         }
         if (sortcri !== "" && sortOrd !== "") {
             url.searchParams.append('sortby', sortcri);
             url.searchParams.append('order', sortOrd);
-            url.searchParams.append("page", currPage);
-            url.searchParams.append('limit', 12);
         }
-        else if (order !== "") {
+        if (order !== "") {
             url.searchParams.append('sortby', 'title')
             url.searchParams.append('order', order);
-            url.searchParams.append("page", currPage);
-            url.searchParams.append('limit', 12);
         }
+        url.searchParams.append("page", currPage);
+        url.searchParams.append('limit', 12);
         axios.get(url)
             .then((res) => {
                 setProductData(res.data)

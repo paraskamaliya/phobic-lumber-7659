@@ -83,21 +83,21 @@ const Cartpage = () => {
                     <Tbody>
                         {cartData.map((product) => (
                             <Tr textAlign={"center"} alignItems={"center"} key={product.id}>
-                                <Td textAlign={"center"}>{product.id}</Td>
+                                <Td textAlign={"center"}>{product.id}.</Td>
                                 <Td justifySelf={"center"}>
-                                    <Image m="auto" src={product.image} alt={product.title} h={20} w={20} />
+                                    <Image m="auto" src={product.image} alt={product.title} h={"100"} w={"100"} />
                                 </Td>
-                                <Td textAlign={"center"}>{product.title}</Td>
+                                <Td textAlign={"center"} fontSize={"xl"}>{product.title}</Td>
                                 <Td >
                                     <HStack justify={"center"}>
                                         <IconButton isDisabled={product.quantity === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => decreaseQuantity(product.id)} />
-                                        <Text>{product.quantity}</Text>
+                                        <Text fontSize={"xl"}>{product.quantity}</Text>
                                         <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => increaseQuantity(product.id)} />
                                     </HStack>
                                 </Td>
-                                <Td textAlign={"center"}>{product.category}</Td>
-                                <Td textAlign={"center"}>{product.rating}⭐</Td>
-                                <Td textAlign={"center"}>₹{product.price}</Td>
+                                <Td textAlign={"center"} fontSize={"xl"}>{product.category}</Td>
+                                <Td textAlign={"center"} fontSize={"xl"}>{product.rating}⭐</Td>
+                                <Td textAlign={"center"} fontSize={"xl"}>₹{product.price}</Td>
                                 <Td textAlign={"center"}>
                                     <IconButton
                                         aria-label="Remove from Cart"
@@ -120,7 +120,7 @@ const Cartpage = () => {
                     </Box>
                 </Stack>
             </Box>
-        </Box>
+        </Box >
         <Button bg={"#426800"} color={"white"} onClick={() => { navigate("/payment") }}>Place Order</Button>
     </>
 }

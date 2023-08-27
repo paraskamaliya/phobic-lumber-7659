@@ -179,6 +179,9 @@ const Adminhome = () => {
                                         <FormLabel>rating :-
                                             <Input value={editedProduct.rating} name="rating" onChange={(e) => handleInputChange(e)} />
                                         </FormLabel>
+                                        <FormLabel>Popular :-
+                                            <Input value={editedProduct.popular} name="popular" onChange={(e) => handleInputChange(e)} />
+                                        </FormLabel>
                                         <FormLabel>Price :-
                                             <Input value={editedProduct.price} name="price" onChange={(e) => handleInputChange(e)} />
                                         </FormLabel>
