@@ -22,7 +22,6 @@ function Allroutes() {
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/productform" element={<ProductForm />} />
-        <Route path="/blog" element={<Blog />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/payment" element={<Checkout />} />
     </Routes>

@@ -119,7 +119,7 @@ const Productpage = () => {
                                 {productData?.popular === "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
                             </div>
                         </Box>
-                        <HStack >
+                        <HStack>
                             {productData?.images?.length > 0 && productData.images.map((image, i) => {
                                 return <Image key={i} mt={5} src={image} w={"50px"} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} onClick={() => setCurrImage(i)} _hover={{ border: "2px solid #426800" }} border={currImage === i ? "2px solid black" : ""} />
                             })}
@@ -133,7 +133,7 @@ const Productpage = () => {
                     <Text fontSize={"xl"} mb={3}>{productData?.category}</Text>
                     <Text letterSpacing={1}>CHECK DELIVERY</Text>
                     <HStack gap={0} w={"80%"}>
-                        <Input placeholder="Enter PIN Code" borderRadius={0} variant='flushed' type="number" value={pin} onChange={(e) => setPin(e.target.value)} />
+                        <Input placeholder="Enter PIN Code" borderRadius={0} variant='flushed' type="number" value={pin} onChange={(e) => setPin(e.target.value)} focusBorderColor="#426800" />
                         <Button borderRadius={0} bg={"#426800"} color={"white"} letterSpacing={1} onClick={(e) => handleCheck(e)}>CHECK</Button>
                     </HStack>
                     <Text mb={4} color={estiDeli === "Please Enter Pin Code" ? "red" : "green"}>{estiDeli}</Text>
@@ -143,7 +143,7 @@ const Productpage = () => {
                         <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty + 1)} />
                         <Button bg={"#426800"} color={"white"} onClick={() => handleClick(id, qty)}>Add to Cart</Button>
                     </HStack>
-                    <HStack w={"100%"} mt={4} textAlign={"center"} alignContent={"center"}>
+                    <HStack w={"80%"} mt={4} textAlign={"center"} alignContent={"center"}>
                         <Box w={"20%"} alignItems={"center"} justifyContent={"center"}>
                             <Image m={"auto"} src="https://www.ugaoo.com/cdn/shop/files/shipping_25798584-6184-42f8-b1d1-d9728a83ef84.png?v=1676873379" w={20} h={20} />
                             <Text>Free Shipping above ₹499</Text>
@@ -151,7 +151,7 @@ const Productpage = () => {
                         <Spacer />
                         <Box w={"20%"} alignItems={"center"} justifyContent={"center"}>
                             <Image m={"auto"} src="https://www.ugaoo.com/cdn/shop/files/GuaranteedReturn.png?v=1676873444" w={20} h={20} />
-                            <Text>Guaranteed Replacements if Damaged</Text>
+                            <Text noOfLines={2}>Guaranteed Replacements if Damaged</Text>
                         </Box>
                         <Spacer />
                         <Box w={"20%"} alignItems={"center"} justifyContent={"center"}>
@@ -187,12 +187,12 @@ const Productpage = () => {
                 </Box>
             )}
             <hr />
-            <Box w={"60%"} m={"auto"} p={7}>
+            <Box w={["80%", "80%", "60%"]} m={"auto"} p={7}>
                 <Heading color={"#426800"} mb={3}>Tips For Care</Heading>
                 <Accordion allowMultiple>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: 'green.50' }}>
+                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Water-2_2x_e01f383f-4647-47cf-a82f-31ff906cf3f3_small.png?v=1656923200" w={8} />
@@ -208,7 +208,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: 'green.50' }}>
+                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Sunlight-2_2x_c2ce9dfa-edf9-4a1d-94fa-4e01e6baea45_small.png?v=1656923265" w={8} />
@@ -224,7 +224,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: 'green.50' }}>
+                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Animal_2_2x_7abd45ab-b3e1-4d66-939f-1c1a4db5672d_small.png?v=1656923522" w={8} />
@@ -240,7 +240,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: 'green.50' }}>
+                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Maintainance-1_2x_809fc5b5-c212-4f22-803b-50241e478b2f_small.png?v=1656923507" w={8} />
@@ -268,10 +268,10 @@ const Productpage = () => {
                         </HStack>
                     </Stack>
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <Stack direction={"row"} gap={"2%"}>
+                        <Stack direction={["column", "column", "row"]} gap={"2%"}>
                             {userData?.recent?.length > 0 && userData?.recent.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Box key={item.id} w={"20%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
-                                    <Image src={item.image} w={300} h={250} borderRadius={"15px 15px 0px 0px"} />
+                                return <Box key={item.id} w={["60%", "60%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
+                                    <Image src={item.image} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
                                     <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
                                     <Text fontSize={"md"}>₹{item.price}</Text>
                                     <Text>{item.rating}⭐</Text>
@@ -282,7 +282,7 @@ const Productpage = () => {
                 </Box>
             }
             <Footer />
-        </Box>
+        </Box >
     </>
 }
 export default Productpage

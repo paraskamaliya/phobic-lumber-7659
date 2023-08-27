@@ -70,21 +70,21 @@ const Products = () => {
         return <ErrorIndicator />
     }
     return (
-        <Box pt={5} bg={"green.50"}>
+        <Box pt={5} >
             <Stack direction={"row"} w={"70%"} m={"auto"}>
-                <Input placeholder="Search by Product Name" borderColor={"#426800"} backgroundColor={"white"} value={query} onChange={(e) => setQuery(e.target.value)} />
+                <Input placeholder="Search by Product Name" focusBorderColor="#426800" borderColor={"#426800"} backgroundColor={"white"} value={query} onChange={(e) => setQuery(e.target.value)} />
                 <IconButton icon={<SearchIcon />} bg="#426800" color={"white"} onClick={fetchTheData} />
             </Stack>
             <Stack direction={["column", "column", "row"]} w={["70%", "70%", "60%"]} m={"auto"} mt={"1"}>
-                <Select placeholder="Select Sort Criteria" w={["70%", "70%", "fit-content"]} m={"auto"} borderColor={"#426800"} onChange={(e) => setSortCri(e.target.value)} backgroundColor={"white"} value={sortcri}>
+                <Select placeholder="Select Sort Criteria" w={["70%", "70%", "fit-content"]} m={"auto"} focusBorderColor="#426800" borderColor={"#426800"} onChange={(e) => setSortCri(e.target.value)} backgroundColor={"white"} value={sortcri}>
                     <option value={"price"}>Price</option>
                     <option value={"rating"}>Rating</option>
                 </Select>
-                <Select placeholder="Select Sorting Order" w={["70%", "70%", "fit-content"]} m={"auto"} borderColor={"#426800"} onChange={(e) => setSortOrd(e.target.value)} backgroundColor={"white"} value={sortOrd}>
+                <Select placeholder="Select Sorting Order" w={["70%", "70%", "fit-content"]} m={"auto"} borderColor={"#426800"} focusBorderColor="#426800" onChange={(e) => setSortOrd(e.target.value)} backgroundColor={"white"} value={sortOrd}>
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </Select>
-                <Select placeholder="Select for Alphabetic Order" w={["70%", "70%", "fit-content"]} m={"auto"} borderColor={"#426800"} value={order} onChange={(e) => setOrder(e.target.value)} backgroundColor={"white"}>
+                <Select placeholder="Select for Alphabetic Order" w={["70%", "70%", "fit-content"]} focusBorderColor="#426800" m={"auto"} borderColor={"#426800"} value={order} onChange={(e) => setOrder(e.target.value)} backgroundColor={"white"}>
                     <option value="asc">A to Z</option>
                     <option value="desc">Z to A</option>
                 </Select>

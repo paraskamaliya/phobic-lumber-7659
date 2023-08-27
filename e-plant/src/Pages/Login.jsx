@@ -77,36 +77,36 @@ const Login = () => {
             })
             .catch((err) => console.log(err))
     }
-    return (<Tabs variant='soft-rounded' colorScheme='green' m={"auto"} w={"50%"} isFitted mt={10}>
+    return (<Tabs variant='soft-rounded' m={"auto"} w={"50%"} isFitted mt={10}>
         <TabList>
-            <Tab>Login</Tab>
-            <Tab>SignUp</Tab>
+            <Tab _selected={{ color: "white", bg: "#426800" }}>Login</Tab>
+            <Tab _selected={{ color: "white", bg: "#426800" }}>SignUp</Tab>
         </TabList>
 
         <TabPanels>
             <TabPanel w={"70%"} m={"auto"} >
                 <FormControl mt={1}>
-                    <Input value={email} name="email" type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
+                    <Input value={email} name="email" type="email" focusBorderColor="#426800" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={password} type="password" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
+                    <Input value={password} type="password" name="password" focusBorderColor="#426800" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
                 </FormControl>
-                <Button onClick={handleLogin} mt={2} colorScheme="green">Login</Button>
+                <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"}>Login</Button>
             </TabPanel>
             <TabPanel w={"70%"} m={"auto"} >
                 <FormControl mt={1}>
-                    <Input value={name} name="name" type="text" onChange={(e) => { setName(e.target.value) }} placeholder="Enter Name" />
+                    <Input value={name} focusBorderColor="#426800" name="name" type="text" onChange={(e) => { setName(e.target.value) }} placeholder="Enter Name" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={email} name="email" type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
+                    <Input value={email} name="email" focusBorderColor="#426800" type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={password} type="password" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
+                    <Input value={password} type="password" focusBorderColor="#426800" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={address} type="text" name="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter Address" />
+                    <Input value={address} type="text" focusBorderColor="#426800" name="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter Address" />
                 </FormControl>
-                <Button mt={2} colorScheme="green" onClick={handleSignup}>SignUp</Button>
+                <Button mt={2} bg={"#426800"} color={"white"} onClick={handleSignup}>SignUp</Button>
             </TabPanel>
         </TabPanels>
     </Tabs>)
