@@ -1,4 +1,4 @@
-import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Card, CardBody, Link } from "@chakra-ui/react"
+import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Link } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
@@ -48,7 +48,6 @@ const Home = () => {
     }
     useEffect(() => {
         fetchPopular();
-        console.log(popularProduct);
         const interval = setInterval(() => {
             handleInc();
         }, 3000);
@@ -115,12 +114,14 @@ const Home = () => {
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
                         <Stack direction={["column", "column", "row"]} w={"100%"} mt={5} gap={"1%"}>
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Box key={item.id} w={["90%", "90%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
-                                    <Image src={item.images[0]} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
-                                    <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
-                                    <Text fontSize={"md"}>₹{item.price}</Text>
-                                    <Text>{item.rating}⭐</Text>
-                                </Box>
+                                return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none" }} to={`products/${item.id}`} key={item.id} w={["90%", "90%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
+                                    <Box >
+                                        <Image src={item.images[0]} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
+                                        <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
+                                        <Text fontSize={"md"}>₹{item.price}</Text>
+                                        <Text>{item.rating}⭐</Text>
+                                    </Box>
+                                </Link>
                             })}
                         </Stack>
                     </Box>
@@ -150,7 +151,7 @@ const Home = () => {
                 </Stack>
             </Box>
             <Footer />
-        </Box>
+        </Box >
     )
 }
 export default Home
