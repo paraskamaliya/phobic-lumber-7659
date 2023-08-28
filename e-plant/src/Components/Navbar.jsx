@@ -71,7 +71,7 @@ function Navbar() {
                         <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                     </ChakraLink>
                     <ChakraLink as={ReactRouterLink} to={"/cart"}>
-                        <Button leftIcon={<FaShoppingCart />} bg={"#426800"} color={"white"}>{calculateTotalQuantity() || 0}</Button>
+                        <IconButton icon={<FaShoppingCart />} bg={"#426800"} color={"white"} />
                     </ChakraLink>
                 </>
                 ) : null}
