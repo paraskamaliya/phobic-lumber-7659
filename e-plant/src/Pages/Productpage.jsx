@@ -37,6 +37,7 @@ const Productpage = () => {
                 console.log(err)
                 setLoading(false)
             })
+        console.log(productData);
     }
     const handleCheck = () => {
         if (pin !== "") {
@@ -116,7 +117,7 @@ const Productpage = () => {
                         <Box position={"relative"}>
                             {productData?.images?.length > 0 && <Image src={productData.images[currImage]} w={"500px"} border={"1px solid #426800"} />}
                             <div style={{ position: 'absolute', top: '0', right: '0' }}>
-                                {productData?.popular === "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
+                                {productData?.popular == "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
                             </div>
                         </Box>
                         <HStack>

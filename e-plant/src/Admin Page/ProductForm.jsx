@@ -46,7 +46,7 @@ const ProductForm = () => {
                         boxImage: "",
                         boxContent: new Array(4).fill(""),
                         rating: "",
-                        popular: false
+                        popular: "false"
                     })
                     navigate("/admin/home")
                 }
