@@ -56,7 +56,8 @@ From this page new user can register themself with name, email, password and add
 #### Product Page :-
 This is product page where user can see all the products, user can sort by rating and price in two orders also user sort by the product name. User can add to cart product by single click from this page. If the product is popular then on card top left corner it will visible as text to user for better usability.
 
-![Product page](https://github.com/paraskamaliya/phobic-lumber-7659/assets/130351451/326c2396-a476-43e2-83e2-7a63e04ee462)
+![Product Page](https://github.com/paraskamaliya/phobic-lumber-7659/assets/130351451/d8089b7e-84ec-47c0-858f-4340144a5953)
+
 
 #### Single Product Page :-
 This is Single product page, where user can see all the details related to any particular product. User can add multiple quantity of product from this page. This page have some important information related to product. Also at bottom of this page user can see recently visited products by them in card manner.
