@@ -7,6 +7,7 @@
 E-plant is basically E-Commerce which allows user to buy Plants from online store. E-plant have two kind of user profiles.
 * Admin Section
 * User Page
+Deployment Link :- https://e-plant.vercel.app/
 
 ## Tech Stack
 
