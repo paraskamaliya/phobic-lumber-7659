@@ -1,4 +1,4 @@
-import { Box, Button, Card, FormControl, FormHelperText, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, PinInput, PinInputField, Stack, Text, HStack, useToast, Select, ModalCloseButton } from "@chakra-ui/react"
+import { Box, Button, Card, FormControl, FormHelperText, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, PinInput, PinInputField, Stack, Text, HStack, useToast, Select, ModalCloseButton, Tooltip } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ const Checkout = () => {
     const [cardnum, setCardNum] = useState("");
     const [cardSel, setCardSel] = useState("");
     const navigate = useNavigate();
+    const [flag, setFlag] = useState(false);
 
     const handleCouponCode = () => {
         if (couponCode === "Masai30") {
@@ -24,6 +25,7 @@ const Checkout = () => {
                 duration: 3000,
                 isClosable: true,
             })
+            setFlag(true);
         }
         else if (couponCode === "Masai15") {
             let newAmount = Math.floor(amount * 0.85);
@@ -36,6 +38,7 @@ const Checkout = () => {
                 duration: 3000,
                 isClosable: true,
             })
+            setFlag(true);
         }
         else {
             toast({
@@ -85,7 +88,9 @@ const Checkout = () => {
         </Heading>
         <Stack w={"80%"} m={"auto"} direction={"row"} mb={5}>
             <FormControl w={"80%"} m={"auto"} >
-                <Input placeholder="Enter Coupon Code" focusBorderColor="#426800" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} borderColor={"#426800"} />
+                <Tooltip hasArrow label={flag == true && "You have already applied Coupon"} placement="bottom-start">
+                    <Input placeholder="Enter Coupon Code" isDisabled={flag == true} focusBorderColor="#426800" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} borderColor={"#426800"} />
+                </Tooltip>
                 <FormHelperText>Please be carefull while entering coupon code, it will be not changed.</FormHelperText>
                 <Button bg={"#426800"} color={"white"} onClick={handleCouponCode}>Apply Coupon</Button>
             </FormControl>
