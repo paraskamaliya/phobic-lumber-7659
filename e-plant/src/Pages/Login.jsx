@@ -77,14 +77,14 @@ const Login = () => {
             })
             .catch((err) => console.log(err))
     }
-    return (<Tabs variant='soft-rounded' m={"auto"} w={"50%"} isFitted mt={10}>
+    return (<Tabs variant='soft-rounded' m={"auto"} w={["80%","70%","50%"]} isFitted mt={10}>
         <TabList>
             <Tab _selected={{ color: "white", bg: "#426800" }}>Login</Tab>
             <Tab _selected={{ color: "white", bg: "#426800" }}>SignUp</Tab>
         </TabList>
 
         <TabPanels>
-            <TabPanel w={"70%"} m={"auto"} >
+            <TabPanel w={["80%","80%","70%"]} m={"auto"} >
                 <FormControl mt={1}>
                     <Input value={email} name="email" type="email" focusBorderColor="#426800" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
@@ -93,7 +93,7 @@ const Login = () => {
                 </FormControl>
                 <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"}>Login</Button>
             </TabPanel>
-            <TabPanel w={"70%"} m={"auto"} >
+            <TabPanel w={["80%","80%","70%"]} m={"auto"} >
                 <FormControl mt={1}>
                     <Input value={name} focusBorderColor="#426800" name="name" type="text" onChange={(e) => { setName(e.target.value) }} placeholder="Enter Name" />
                 </FormControl>

@@ -88,7 +88,7 @@ const Checkout = () => {
         </Heading>
         <Stack w={"80%"} m={"auto"} direction={"row"} mb={5}>
             <FormControl w={"80%"} m={"auto"} >
-                <Tooltip hasArrow label={flag == true && "You have already applied Coupon"} placement="bottom-start">
+                <Tooltip hasArrowvere label={flag == true && "You have already applied Coupon"} placement="bottom-start">
                     <Input placeholder="Enter Coupon Code" isDisabled={flag == true} focusBorderColor="#426800" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} borderColor={"#426800"} />
                 </Tooltip>
                 <FormHelperText>Please be carefull while entering coupon code, it will be not changed.</FormHelperText>
