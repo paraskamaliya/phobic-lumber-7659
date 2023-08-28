@@ -30,6 +30,20 @@ E-plant is basically E-Commerce which allows user to buy Plants from online stor
 - Add & Delete User Data
 
 
+## Website - Screenshots
+
+#### Home Page:-
+This is the home page of the website whenever user comes on the website user will redirect to this page. On this page user can see navbar, some articles related to site, some Popular products and Footer.
+
+![Image Description](https://github.com/paraskamaliya/phobic-lumber-7659/assets/130351451/aa256691-0701-438f-86d2-e7c4e5d43dd9)
+
+#### Login Page:- 
+From this page user can login by their credentials and if user is not logged in then user can not see products in full page and user can not add products in the cart.
+
+![Image Description](https://github.com/paraskamaliya/phobic-lumber-7659/assets/130351451/59e097c1-b974-4770-a428-fc638ff464ba)
+
+
+
 ## API Reference
 
 #### Product Data
