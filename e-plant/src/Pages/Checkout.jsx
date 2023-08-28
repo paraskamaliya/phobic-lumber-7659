@@ -116,6 +116,7 @@ const Checkout = () => {
                             required
                             placeholder="Enter Card Number"
                             maxLength={16}
+                            type="number"
                             minLength={16}
                             pattern="[0-9]{16}"
                             title="Please enter a 16-digit card number."

@@ -1,4 +1,4 @@
-import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Card, CardBody, Link } from "@chakra-ui/react"
+import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Link } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
@@ -47,8 +47,6 @@ const Home = () => {
         }
     }
     useEffect(() => {
-        fetchPopular();
-        console.log(popularProduct);
         const interval = setInterval(() => {
             handleInc();
         }, 3000);
@@ -111,20 +109,29 @@ const Home = () => {
                         <IconButton icon={<ChevronRightIcon />} backgroundColor={"#426800"} color={"white"} onClick={handleNext} isDisabled={startIndex + 5 >= popularProduct.length} />
                     </Stack>
                 </Stack>
-                {popularProduct?.length !== 0 &&
-                    <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <Stack direction={["column", "column", "row"]} w={"100%"} mt={5} gap={"1%"}>
-                            {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Box key={item.id} w={["90%", "90%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
-                                    <Image src={item.images[0]} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
-                                    <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
-                                    <Text fontSize={"md"}>₹{item.price}</Text>
-                                    <Text>{item.rating}⭐</Text>
-                                </Box>
-                            })}
-                        </Stack>
-                    </Box>
-                }
+                <Stack direction={["column", "column", "row"]} w={"100%"} mt={5} gap={"1%"}>
+                    <Card w={["90%", "90%", "33%"]} m={"auto"} boxShadow={"md"} alignItems={"center"}>
+                        <CardBody alignContent={"center"}>
+                            <Image src={products[currentData].images[0]} />
+                            <Text>Name :- {products[currentData].title}</Text>
+                            <Text>Price :- {products[currentData].price}</Text>
+                        </CardBody>
+                    </Card>
+                    <Card w={["90%", "90%", "33%"]} m={"auto"} boxShadow={"md"} alignItems={"center"}>
+                        <CardBody>
+                            <Image src={products[currentData + 1].images[0]} />
+                            <Text>Name :- {products[currentData + 1].title}</Text>
+                            <Text>Price :- {products[currentData + 1].price}</Text>
+                        </CardBody>
+                    </Card>
+                    <Card w={["90%", "90%", "33%"]} m={"auto"} boxShadow={"md"} alignItems={"center"}>
+                        <CardBody>
+                            <Image src={products[currentData + 2].images[0]} />
+                            <Text>Name :- {products[currentData + 2].title}</Text>
+                            <Text>Price :- {products[currentData + 2].price}</Text>
+                        </CardBody>
+                    </Card>
+                </Stack>
                 <Button mt={10} backgroundColor={"#426800"} color={"white"} alignContent={"end"}>
                     <Link as={ReactRouterLink} to={"/products"} _hover={{ textDecoration: "none" }}>See All</Link>
                 </Button>
@@ -150,7 +157,7 @@ const Home = () => {
                 </Stack>
             </Box>
             <Footer />
-        </Box>
+        </Box >
     )
 }
 export default Home
