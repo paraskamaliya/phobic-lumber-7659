@@ -1,5 +1,5 @@
 
-![Image description]([https://ibb.co/V9tNF6H](https://i.ibb.co/LR8PTKQ/E-Plant-removebg-preview1.png)https://i.ibb.co/LR8PTKQ/E-Plant-removebg-preview1.png)
+![E-Plant](https://github.com/paraskamaliya/phobic-lumber-7659/assets/130351451/52c1fb08-ef01-4704-9768-f75721a95842)
 
 
 
