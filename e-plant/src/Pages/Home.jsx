@@ -113,7 +113,7 @@ const Home = () => {
                 {popularProduct?.length !== 0 &&
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
                         <SimpleGrid columns={["1", "2", "2", "5"]}
-                            gap={4}
+                            gap={0.5}
                             justifyContent="center" w={"100%"} mt={5}>
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
                                 return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none" }} to={`products/${item.id}`} key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"} >

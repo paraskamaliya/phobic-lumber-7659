@@ -269,8 +269,8 @@ const Productpage = () => {
                         </HStack>
                     </Stack>
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <SimpleGrid columns={["1", "2", "2", "5"]}
-                            gap={4}
+                        <SimpleGrid columns={["1", "2", "5", "5"]}
+                            gap={0.5}
                             justifyContent="center" w={"100%"} mt={5}>
                             {userData?.recent?.length > 0 && userData?.recent.slice(startIndex, startIndex + 5).map((item) => {
                                 return <Box key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
