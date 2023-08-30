@@ -1,4 +1,4 @@
-import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade } from "@chakra-ui/react"
+import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade, SimpleGrid } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
@@ -269,16 +269,18 @@ const Productpage = () => {
                         </HStack>
                     </Stack>
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <Stack direction={["column", "column", "row"]} gap={"2%"}>
+                        <SimpleGrid columns={["1", "2", "2", "5"]}
+                            gap={4}
+                            justifyContent="center" w={"100%"} mt={5}>
                             {userData?.recent?.length > 0 && userData?.recent.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Box key={item.id} w={["60%", "60%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
-                                    <Image src={item.image} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
+                                return <Box key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
+                                    <Image src={item.image} w={"100%"} h={300} borderRadius={"15px 15px 0px 0px"} />
                                     <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
                                     <Text fontSize={"md"}>₹{item.price}</Text>
                                     <Text>{item.rating}⭐</Text>
                                 </Box>
                             })}
-                        </Stack>
+                        </SimpleGrid>
                     </Box>
                 </Box>
             }

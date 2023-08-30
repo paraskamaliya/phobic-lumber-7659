@@ -1,4 +1,4 @@
-import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Link } from "@chakra-ui/react"
+import { Box, VStack, Stack, Heading, Text, Image, Button, IconButton, HStack, CircularProgress, CircularProgressLabel, Spacer, Link, SimpleGrid } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
@@ -112,18 +112,20 @@ const Home = () => {
                 </Stack>
                 {popularProduct?.length !== 0 &&
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <Stack direction={["column", "column", "row"]} w={"100%"} mt={5} gap={"1%"}>
+                        <SimpleGrid columns={["1", "2", "2", "5"]}
+                            gap={4}
+                            justifyContent="center" w={"100%"} mt={5}>
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none" }} to={`products/${item.id}`} key={item.id} w={["90%", "90%", "20%"]} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"}>
+                                return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none" }} to={`products/${item.id}`} key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"} >
                                     <Box >
-                                        <Image src={item.images[0]} w={300} h={300} borderRadius={"15px 15px 0px 0px"} />
+                                        <Image src={item.images[0]} w={"100%"} h={300} borderRadius={"15px 15px 0px 0px"} />
                                         <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
                                         <Text fontSize={"md"}>₹{item.price}</Text>
                                         <Text>{item.rating}⭐</Text>
                                     </Box>
                                 </Link>
                             })}
-                        </Stack>
+                        </SimpleGrid>
                     </Box>
                 }
                 <Button mt={10} backgroundColor={"#426800"} color={"white"} alignContent={"end"}>
