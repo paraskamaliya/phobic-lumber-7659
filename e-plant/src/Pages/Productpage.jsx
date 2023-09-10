@@ -110,7 +110,7 @@ const Productpage = () => {
         return <Spinner />
     }
     return <>
-        <Box pt={10} >aa
+        <Box pt={10} >
             <Stack w={"80%"} m={"auto"} direction={["column", "column", "row"]} gap={10} mb={5}>
                 <Box w={["100%", "100%", "50%"]}>
                     <Stack direction={"column"} alignItems={"center"} >
