@@ -11,19 +11,36 @@ import ProductForm from "../Admin Page/ProductForm";
 import Blog from "../Pages/Blog";
 import Profile from "../Pages/Profile";
 import Checkout from "../Pages/Checkout";
+import { PrivateRoute } from "./PrivateRoute";
 function Allroutes() {
     return <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="*" element={<Notfound />} />
-        <Route path="/products/:id" element={<Productpage />} />
+        <Route path="/products/:id" element={
+            <PrivateRoute>
+                <Productpage />
+            </PrivateRoute>
+        } />
         <Route path="/admin/home" element={<Adminhome />} />
-        <Route path="/cart" element={<Cartpage />} />
+        <Route path="/cart" element={
+            <PrivateRoute>
+                <Cartpage />
+            </PrivateRoute>
+        } />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/productform" element={<ProductForm />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/payment" element={<Checkout />} />
+        <Route path="/profile" element={
+            <PrivateRoute>
+                <Profile />
+            </PrivateRoute>
+        } />
+        <Route path="/payment" element={
+            <PrivateRoute>
+                <Checkout />
+            </PrivateRoute>
+        } />
     </Routes>
 }
 export default Allroutes;
