@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList, TabPanel, TabPanels, FormControl, Input, Button, us
 import { useContext, useState } from "react"
 import { AuthContext } from "../Context/AuthContextProvider"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { login } = useContext(AuthContext);
@@ -11,6 +11,7 @@ const Login = () => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const toast = useToast();
+    const location = useLocation();
     const navigate = useNavigate();
     const handleLogin = () => {
         if (email === "admin" && password === "admin") {
@@ -29,7 +30,7 @@ const Login = () => {
                             isClosable: true,
                         });
                         login();
-                        navigate("/")
+                        navigate(location.state || "/", { replace: true })
                         localStorage.setItem("user", JSON.stringify(res.data[0]))
                     } else {
                         toast({
@@ -77,14 +78,14 @@ const Login = () => {
             })
             .catch((err) => console.log(err))
     }
-    return (<Tabs variant='soft-rounded' m={"auto"} w={["80%","70%","50%"]} isFitted mt={10}>
+    return (<Tabs variant='soft-rounded' m={"auto"} w={["80%", "70%", "50%"]} isFitted mt={10}>
         <TabList>
             <Tab _selected={{ color: "white", bg: "#426800" }}>Login</Tab>
             <Tab _selected={{ color: "white", bg: "#426800" }}>SignUp</Tab>
         </TabList>
 
         <TabPanels>
-            <TabPanel w={["80%","80%","70%"]} m={"auto"} >
+            <TabPanel w={["80%", "80%", "70%"]} m={"auto"} >
                 <FormControl mt={1}>
                     <Input value={email} name="email" type="email" focusBorderColor="#426800" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
@@ -93,7 +94,7 @@ const Login = () => {
                 </FormControl>
                 <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"}>Login</Button>
             </TabPanel>
-            <TabPanel w={["80%","80%","70%"]} m={"auto"} >
+            <TabPanel w={["80%", "80%", "70%"]} m={"auto"} >
                 <FormControl mt={1}>
                     <Input value={name} focusBorderColor="#426800" name="name" type="text" onChange={(e) => { setName(e.target.value) }} placeholder="Enter Name" />
                 </FormControl>

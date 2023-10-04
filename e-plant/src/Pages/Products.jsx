@@ -16,6 +16,7 @@ const Products = () => {
     const [err, setErr] = useState(false);
     const [totalData, setTotalData] = useState();
     const [currPage, setCurrPage] = useState(1);
+    const [render, setRender] = useState(false);
     const limit = 12;
     let url = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const fetchTheData = () => {
@@ -49,6 +50,13 @@ const Products = () => {
     const handlePageChange = (value) => {
         setCurrPage(value);
     }
+    const handleReset = () => {
+        setQuery("");
+        setSortCri("");
+        setSortOrd("");
+        setOrder("");
+        setRender(prev => prev == true ? false : true)
+    }
     let url1 = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const allthedata = () => {
         axios.get(url1)
@@ -62,7 +70,7 @@ const Products = () => {
     useEffect(() => {
         fetchTheData();
         allthedata();
-    }, [currPage])
+    }, [currPage, render])
     if (loading) {
         return <Spinner size={"xl"} />
     }
@@ -89,6 +97,7 @@ const Products = () => {
                     <option value="desc">Z to A</option>
                 </Select>
                 <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData}>Apply</Button>
+                <Button backgroundColor={"red"} color={"white"} onClick={handleReset}>Reset</Button>
             </Stack>
             <SimpleGrid columns={["1", "1", "2", "3"]} spacing='20px' w={"80%"} m={"auto"} mt={"5"}>
                 {productData?.map((item) => {

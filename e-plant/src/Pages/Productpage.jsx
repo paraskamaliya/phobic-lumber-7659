@@ -37,7 +37,6 @@ const Productpage = () => {
                 console.log(err)
                 setLoading(false)
             })
-        console.log(productData);
     }
     const handleCheck = () => {
         if (pin !== "") {
