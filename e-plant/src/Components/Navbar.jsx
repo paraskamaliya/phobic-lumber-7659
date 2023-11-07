@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link as ReactRouterLink } from "react-router-dom"
+import { ChevronDownIcon } from "@chakra-ui/icons"
 import {
     Box, Link as ChakraLink, Image, Spacer, Stack, IconButton, Avatar, Button, AlertDialog,
     AlertDialogBody,
@@ -8,7 +9,11 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     AlertDialogCloseButton,
-    useDisclosure
+    useDisclosure,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem
 } from '@chakra-ui/react'
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from "./Navbar.module.css"
@@ -67,12 +72,21 @@ function Navbar() {
             <Spacer />
             <Box display={"flex"} gap={"20px"} alignItems={"center"}>
                 {isAuth ? (<>
-                    <ChakraLink as={ReactRouterLink} to={"/profile"}>
-                        <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
-                    </ChakraLink>
-                    <ChakraLink as={ReactRouterLink} to={"/cart"}>
-                        <IconButton icon={<FaShoppingCart />} bg={"#426800"} color={"white"} />
-                    </ChakraLink>
+                    <Menu>
+                        <MenuButton as={Button} rounded={'full'}
+                            variant={'link'}
+                            cursor={'pointer'} rightIcon={<ChevronDownIcon fontSize={"2xl"} />}>
+                            <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem _hover={{ bgColor: "#426800", color: "white" }}>
+                                <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"}>Profile</ChakraLink>
+                            </MenuItem>
+                            <MenuItem _hover={{ bgColor: "#426800", color: "white" }}>
+                                <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto   ">Cart</ChakraLink>
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
                 </>
                 ) : null}
                 <Button bg={isAuth ? "red" : "#426800"} color={"white"} onClick={isAuth ? onOpen : undefined}>

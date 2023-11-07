@@ -1,4 +1,4 @@
-import { Tab, Tabs, TabList, TabPanel, TabPanels, FormControl, Input, Button, useToast } from "@chakra-ui/react"
+import { Tab, Tabs, TabList, TabPanel, TabPanels, FormControl, Input, Button, useToast, Checkbox, HStack } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 import { AuthContext } from "../Context/AuthContextProvider"
 import axios from "axios";
@@ -6,22 +6,31 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { login } = useContext(AuthContext);
+    const [emailLogin, setEmailLogin] = useState(localStorage.getItem("e-PlantEmail") || "");
+    const [passwordLogin, setPasswordLogin] = useState(localStorage.getItem("e-PlantPass") || "");
+    const [name, setName] = useState("");
+    const [checkBox, setCheckBox] = useState(false);
+    const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const toast = useToast();
     const location = useLocation();
     const navigate = useNavigate();
+
     const handleLogin = () => {
         if (email === "admin" && password === "admin") {
             navigate("/admin/home")
             login()
             localStorage.setItem("login", JSON.stringify(false));
         } else {
-            axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Users?email=${email}`)
+            if (checkBox) {
+                localStorage.setItem("e-PlantEmail", emailLogin);
+                localStorage.setItem("e-PlantPass", passwordLogin);
+            }
+            axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Users?email=${emailLogin}`)
                 .then((res) => {
-                    if (res.data[0].password === password) {
+                    if (res.data[0].password === passwordLogin) {
                         toast({
                             title: 'Login Successful',
                             description: "We've successfully logged into your account.",
@@ -48,6 +57,15 @@ const Login = () => {
         }
     }
     const handleSignup = () => {
+        if (password !== confirmPassword) {
+            return toast({
+                title: 'Password Mismatch',
+                description: "Please enter the same password for confirmation.",
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            })
+        }
         axios.post(`https://64e37895bac46e480e78da47.mockapi.io/Users`, {
             name: name,
             email: email,
@@ -86,12 +104,15 @@ const Login = () => {
 
         <TabPanels>
             <TabPanel w={["80%", "80%", "70%"]} m={"auto"} >
-                <FormControl mt={1}>
-                    <Input value={email} name="email" type="email" focusBorderColor="#426800" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
+                <FormControl mt={2}>
+                    <Input value={emailLogin} name="email" type="email" focusBorderColor="#426800" onChange={(e) => { setEmailLogin(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={password} type="password" name="password" focusBorderColor="#426800" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
+                    <Input value={passwordLogin} type="password" name="password" focusBorderColor="#426800" onChange={(e) => { setPasswordLogin(e.target.value) }} placeholder="Enter Password" />
                 </FormControl>
+                <HStack m={"auto"} mt={2} w={"fit-content"}>
+                    <Checkbox value={checkBox} colorScheme="white" iconColor="#426800" onChange={(e) => setCheckBox(e.target.checked)} /><label>Remember Me</label>
+                </HStack>
                 <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"}>Login</Button>
             </TabPanel>
             <TabPanel w={["80%", "80%", "70%"]} m={"auto"} >
@@ -102,10 +123,13 @@ const Login = () => {
                     <Input value={email} name="email" focusBorderColor="#426800" type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter Email Address" />
                 </FormControl>
                 <FormControl mt={2}>
+                    <Input value={address} type="text" focusBorderColor="#426800" name="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter Address" />
+                </FormControl>
+                <FormControl mt={2}>
                     <Input value={password} type="password" focusBorderColor="#426800" name="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter Password" />
                 </FormControl>
                 <FormControl mt={2}>
-                    <Input value={address} type="text" focusBorderColor="#426800" name="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter Address" />
+                    <Input value={confirmPassword} type="password" focusBorderColor="#426800" name="password" onChange={(e) => { setConfirmPassword(e.target.value) }} placeholder="Enter Confirm Password" />
                 </FormControl>
                 <Button mt={2} bg={"#426800"} color={"white"} onClick={handleSignup}>SignUp</Button>
             </TabPanel>
