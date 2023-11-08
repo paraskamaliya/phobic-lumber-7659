@@ -1,5 +1,5 @@
 import { SearchIcon } from "@chakra-ui/icons"
-import { Box, Button, IconButton, Input, Select, SimpleGrid, Spinner, Stack } from "@chakra-ui/react"
+import { Box, Button, Flex, IconButton, Input, Select, SimpleGrid, Spinner, Stack } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Productcard from "../Components/ProductCard";
@@ -72,7 +72,9 @@ const Products = () => {
         allthedata();
     }, [currPage, render])
     if (loading) {
-        return <Spinner size={"xl"} />
+        return <Flex height="80vh" align="center" justify="center">
+            <Spinner size={"xl"} thickness="5px" color="#426800" speed='0.65s' />
+        </Flex>
     }
     if (err) {
         return <ErrorIndicator />

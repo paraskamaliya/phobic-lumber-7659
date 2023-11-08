@@ -1,4 +1,4 @@
-import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade, SimpleGrid } from "@chakra-ui/react"
+import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade, SimpleGrid, Flex } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
@@ -106,7 +106,9 @@ const Productpage = () => {
         getTheUserData();
     }, [id])
     if (loading) {
-        return <Spinner />
+        return <Flex height="80vh" align="center" justify="center">
+            <Spinner size={"xl"} thickness="5px" color="#426800" speed='0.65s' />
+        </Flex>
     }
     return <>
         <Box pt={10} >
