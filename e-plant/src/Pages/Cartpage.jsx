@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Heading, IconButton, Image, Input, Spacer, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Heading, IconButton, Image, Input, Spacer, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { AddIcon, DeleteIcon, MinusIcon } from "@chakra-ui/icons";
@@ -61,67 +61,72 @@ const Cartpage = () => {
         let amount = calculateTotalAmount();
     }, []);
     if (cartData.length == 0) {
-        return <Heading as={"h1"} color={"#426800"} mt={7}>Oops! Your cart is empty.</Heading>
     }
-    return <>
-        <Box mt={5}>
-            <Heading color={"#426800"}>Cart Page</Heading>
-            <TableContainer>
-                <Table mt={5}>
-                    <Thead>
-                        <Tr bg={"green.50"}>
-                            <Th textAlign={"center"}>ID</Th>
-                            <Th textAlign={"center"}>Image</Th>
-                            <Th textAlign={"center"}>Title</Th>
-                            <Th textAlign={"center"}>Quantity</Th>
-                            <Th textAlign={"center"}>Category</Th>
-                            <Th textAlign={"center"}>Rating</Th>
-                            <Th textAlign={"center"}>Price</Th>
-                            <Th textAlign={"center"}>Delete</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {cartData.map((product) => (
-                            <Tr textAlign={"center"} alignItems={"center"} key={product.id}>
-                                <Td textAlign={"center"}>{product.id}.</Td>
-                                <Td justifySelf={"center"}>
-                                    <Image m="auto" src={product.image} alt={product.title} h={"100"} w={"100"} />
-                                </Td>
-                                <Td textAlign={"center"} fontSize={"xl"}>{product.title}</Td>
-                                <Td >
-                                    <HStack justify={"center"}>
-                                        <IconButton isDisabled={product.quantity === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => decreaseQuantity(product.id)} />
-                                        <Text fontSize={"xl"}>{product.quantity}</Text>
-                                        <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => increaseQuantity(product.id)} />
-                                    </HStack>
-                                </Td>
-                                <Td textAlign={"center"} fontSize={"xl"}>{product.category}</Td>
-                                <Td textAlign={"center"} fontSize={"xl"}>{product.rating}⭐</Td>
-                                <Td textAlign={"center"} fontSize={"xl"}>₹{product.price}</Td>
-                                <Td textAlign={"center"}>
-                                    <IconButton
-                                        aria-label="Remove from Cart"
-                                        icon={<DeleteIcon />}
-                                        colorScheme="red"
-                                        size="sm"
-                                        onClick={() => deleteProduct(product.id)}
-                                    />
-                                </Td>
-                            </Tr>
-                        ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
-            <Box>
-                <Stack direction={["column", "column", "row"]} m={"auto"} w={"80%"} gap={"20%"}>
-                    <Box m={"auto"} w={["80%", "80%", "50%"]}>
-                        <Text fontSize={"2xl"}>Total Quantity: {calculateTotalQuantity()}</Text>
-                        <Text fontSize={"2xl"}>Total Amount: ₹{calculateTotalAmount()}</Text>
+    return <Box>
+        {
+            cartData.length == 0 ?
+                <Flex height={"83vh"} alignItems={"center"} justifyContent={"center"}>
+                    <Heading color={"#426800"} >Oops! Your cart is empty.</Heading>
+                </Flex> :
+                <Box mt={5}>
+                    <Heading color={"#426800"}>Cart Page</Heading>
+                    <TableContainer>
+                        <Table mt={5}>
+                            <Thead>
+                                <Tr bg={"green.50"}>
+                                    <Th textAlign={"center"}>ID</Th>
+                                    <Th textAlign={"center"}>Image</Th>
+                                    <Th textAlign={"center"}>Title</Th>
+                                    <Th textAlign={"center"}>Quantity</Th>
+                                    <Th textAlign={"center"}>Category</Th>
+                                    <Th textAlign={"center"}>Rating</Th>
+                                    <Th textAlign={"center"}>Price</Th>
+                                    <Th textAlign={"center"}>Delete</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {cartData.map((product) => (
+                                    <Tr textAlign={"center"} alignItems={"center"} key={product.id}>
+                                        <Td textAlign={"center"}>{product.id}.</Td>
+                                        <Td justifySelf={"center"}>
+                                            <Image m="auto" src={product.image} alt={product.title} h={"100"} w={"100"} />
+                                        </Td>
+                                        <Td textAlign={"center"} fontSize={"xl"}>{product.title}</Td>
+                                        <Td >
+                                            <HStack justify={"center"}>
+                                                <IconButton isDisabled={product.quantity === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => decreaseQuantity(product.id)} />
+                                                <Text fontSize={"xl"}>{product.quantity}</Text>
+                                                <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => increaseQuantity(product.id)} />
+                                            </HStack>
+                                        </Td>
+                                        <Td textAlign={"center"} fontSize={"xl"}>{product.category}</Td>
+                                        <Td textAlign={"center"} fontSize={"xl"}>{product.rating}⭐</Td>
+                                        <Td textAlign={"center"} fontSize={"xl"}>₹{product.price}</Td>
+                                        <Td textAlign={"center"}>
+                                            <IconButton
+                                                aria-label="Remove from Cart"
+                                                icon={<DeleteIcon />}
+                                                colorScheme="red"
+                                                size="sm"
+                                                onClick={() => deleteProduct(product.id)}
+                                            />
+                                        </Td>
+                                    </Tr>
+                                ))}
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                    <Box>
+                        <Stack direction={["column", "column", "row"]} m={"auto"} w={"80%"} gap={"20%"}>
+                            <Box m={"auto"} w={["80%", "80%", "50%"]}>
+                                <Text fontSize={"2xl"}>Total Quantity: {calculateTotalQuantity()}</Text>
+                                <Text fontSize={"2xl"}>Total Amount: ₹{calculateTotalAmount()}</Text>
+                            </Box>
+                        </Stack>
                     </Box>
-                </Stack>
-            </Box>
-        </Box >
-        <Button bg={"#426800"} color={"white"} onClick={() => { navigate("/payment") }}>Place Order</Button>
-    </>
+                    <Button bg={"#426800"} color={"white"} onClick={() => { navigate("/payment") }}>Place Order</Button>
+                </Box >
+        }
+    </Box>
 }
 export default Cartpage

@@ -16,9 +16,12 @@ import {
     MenuItem
 } from '@chakra-ui/react'
 import { FaShoppingCart } from 'react-icons/fa';
-import styles from "./Navbar.module.css"
+import styles from "./Navbar.module.css";
+import { MdAccountCircle } from "react-icons/md";
+import { IoMdExit } from "react-icons/io";
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
+
 function Navbar() {
     const { isAuth, logout } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,7 +53,7 @@ function Navbar() {
         avatar = data.avatar
         name = data.name
     }
-    return <Box backgroundColor={"#FFF6F4"}>
+    return <Box backgroundColor={"#fff6f4"}>
         <Stack direction={["column", "column", "row"]} m={"auto"} align={"center"} w={"90%"} >
             <Box>
                 <ChakraLink as={ReactRouterLink} to='/'>
@@ -58,16 +61,13 @@ function Navbar() {
                 </ChakraLink>
             </Box>
             <Spacer />
-            <Box display={"flex"} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"}>
+            <Box fontSize={"larger"} display={"flex"} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"}>
                 <NavLink to={"/"} className={({ isActive }) => {
                     return isActive ? styles.active : styles.default
                 }}>Home</NavLink>
                 <NavLink to={"/products"} className={({ isActive }) => {
                     return isActive ? styles.active : styles.default
                 }}>Products</NavLink>
-                {/* <NavLink to={"/blog"} className={({ isActive }) => {
-                    return isActive ? styles.active : styles.default
-                }}>Blog</NavLink> */}
             </Box>
             <Spacer />
             <Box display={"flex"} gap={"20px"} alignItems={"center"}>
@@ -79,18 +79,22 @@ function Navbar() {
                             <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                         </MenuButton>
                         <MenuList>
-                            <MenuItem _hover={{ bgColor: "#426800", color: "white" }}>
-                                <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"}>Profile</ChakraLink>
+                            <MenuItem >
+                                <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"} _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
+                                    <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<MdAccountCircle />}>Profile</Button>
+                                </ChakraLink>
                             </MenuItem>
-                            <MenuItem _hover={{ bgColor: "#426800", color: "white" }}>
-                                <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto   ">Cart</ChakraLink>
+                            <MenuItem >
+                                <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto" _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
+                                    <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<FaShoppingCart />}>Cart</Button>
+                                </ChakraLink>
                             </MenuItem>
                         </MenuList>
                     </Menu>
                 </>
                 ) : null}
-                <Button bg={isAuth ? "red" : "#426800"} color={"white"} onClick={isAuth ? onOpen : undefined}>
-                    <NavLink to={!isAuth ? "/login" : undefined}>
+                <Button bg={isAuth ? "red" : "#426800"} color={"white"} leftIcon={isAuth && <IoMdExit />} onClick={isAuth ? onOpen : undefined} _hover={{ bgColor: isAuth ? "red" : "#426800" }}>
+                    <NavLink to={!isAuth ? "/login" : undefined} >
                         {isAuth ? "Logout" : "Login"}
                     </NavLink>
                     {isAuth && (<AlertDialog

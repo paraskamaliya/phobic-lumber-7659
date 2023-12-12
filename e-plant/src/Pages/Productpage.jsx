@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { MinusIcon, AddIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import Footer from "../Components/Footer";
+import { IoCartOutline } from "react-icons/io5";
 
 const Productpage = () => {
     const [productData, setProductData] = useState([]);
@@ -116,7 +117,7 @@ const Productpage = () => {
                 <Box w={["100%", "100%", "50%"]}>
                     <Stack direction={"column"} alignItems={"center"} >
                         <Box position={"relative"}>
-                            {productData?.images?.length > 0 && <Image src={productData.images[currImage]} w={"500px"} border={"1px solid #426800"} />}
+                            {productData?.images?.length > 0 && <Image src={productData.images[currImage]} boxShadow={"lg"} w={"500px"} border={"1px solid #426800"} />}
                             <div style={{ position: 'absolute', top: '0', right: '0' }}>
                                 {productData?.popular == "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
                             </div>
@@ -143,7 +144,7 @@ const Productpage = () => {
                         <IconButton isDisabled={qty === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty - 1)} />
                         <Text>{qty}</Text>
                         <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty + 1)} />
-                        <Button bg={"#426800"} color={"white"} onClick={() => handleClick(id, qty)}>Add to Cart</Button>
+                        <Button bg={"#426800"} color={"white"} leftIcon={<IoCartOutline />} onClick={() => handleClick(id, qty)}>Add to Cart</Button>
                     </HStack>
                     <HStack w={"80%"} mt={4} textAlign={"center"} alignContent={"center"}>
                         <Box w={"20%"} alignItems={"center"} justifyContent={"center"}>

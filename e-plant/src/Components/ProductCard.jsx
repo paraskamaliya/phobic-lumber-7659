@@ -3,6 +3,7 @@ import { Card, CardBody, CardFooter, Link, Image, Text, Button, useToast } from 
 import { Link as ReactRouterDom, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 import axios from "axios";
+import { IoCartOutline } from "react-icons/io5";
 
 const ProductCard = ({ images, title, rating, price, id, popular, category }) => {
     const { isAuth } = useContext(AuthContext);
@@ -107,7 +108,7 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
     };
 
     return (
-        <Card>
+        <Card boxShadow={"lg"}>
             <CardBody onClick={() => handlerecent(id)} position={"relative"}>
                 <Link as={ReactRouterDom} textDecoration="none" _hover={{ textDecoration: "none" }}>
                     <Image src={images[0]} h="400px" />
@@ -120,7 +121,7 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
                 </Link>
             </CardBody>
             <CardFooter>
-                <Button bg="#426800" color="white" onClick={() => handleClick(id, 1)}>Add to Cart</Button>
+                <Button bg="#426800" leftIcon={<IoCartOutline />} color="white" onClick={() => handleClick(id, 1)}>Add to Cart</Button>
             </CardFooter>
         </Card>
     );
