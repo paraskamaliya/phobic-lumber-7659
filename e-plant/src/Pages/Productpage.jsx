@@ -1,4 +1,4 @@
-import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Card, CardBody, ScaleFade, SimpleGrid, Flex } from "@chakra-ui/react"
+import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Flex } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
@@ -119,7 +119,7 @@ const Productpage = () => {
                         <Box position={"relative"}>
                             {productData?.images?.length > 0 && <Image src={productData.images[currImage]} boxShadow={"lg"} w={"500px"} border={"1px solid #426800"} />}
                             <div style={{ position: 'absolute', top: '0', right: '0' }}>
-                                {productData?.popular == "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
+                                {productData?.popular === "true" && <Text bg={"#FED02F"} letterSpacing={1} p={"1"}>POPULAR</Text>}
                             </div>
                         </Box>
                         <HStack>
@@ -192,10 +192,10 @@ const Productpage = () => {
             <hr />
             <Box w={["80%", "80%", "60%"]} m={"auto"} p={7}>
                 <Heading color={"#426800"} mb={3}>Tips For Care</Heading>
-                <Accordion allowMultiple>
+                <Accordion allowMultiple border={"0.5px solid black"}>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
+                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Water-2_2x_e01f383f-4647-47cf-a82f-31ff906cf3f3_small.png?v=1656923200" w={8} />
@@ -211,7 +211,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
+                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Sunlight-2_2x_c2ce9dfa-edf9-4a1d-94fa-4e01e6baea45_small.png?v=1656923265" w={8} />
@@ -227,7 +227,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
+                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Animal_2_2x_7abd45ab-b3e1-4d66-939f-1c1a4db5672d_small.png?v=1656923522" w={8} />
@@ -243,7 +243,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#B3C399' }}>
+                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Maintainance-1_2x_809fc5b5-c212-4f22-803b-50241e478b2f_small.png?v=1656923507" w={8} />
@@ -260,7 +260,7 @@ const Productpage = () => {
                 </Accordion>
             </Box>
             <hr />
-            {userData?.recent?.length == 0 ? "There is no visited Product" :
+            {userData?.recent?.length === 0 ? "There is no visited Product" :
                 <Box w={"90%"} m={"auto"} mt={10}>
                     <Stack direction={"row"}>
                         <Heading textAlign={"left"} color={"#426800"}>Recent Visited Products</Heading>
