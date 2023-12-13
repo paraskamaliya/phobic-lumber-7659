@@ -4,8 +4,12 @@ import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import Footer from "../Components/Footer"
 import axios from "axios"
+import plant1 from "../Photos/plant1.jpg"
+import plant2 from "../Photos/plant2.jpg"
+import plant3 from "../Photos/plant3.jpg"
+import plant4 from "../Photos/plant4.jpg"
 const Home = () => {
-    const photos = ["https://www.ugaoo.com/cdn/shop/files/Venice12Planter-LightGrey_8bf35189-116d-4866-a064-7d7621a43fe3.jpg?v=1683362524&width=375", "https://www.ugaoo.com/cdn/shop/files/SpiroCeramicPot-White_725fdcf3-b24a-4710-a61e-e2d67af6deaf.jpg?v=1683029966&width=375", "https://www.ugaoo.com/cdn/shop/files/Aimage_3.jpg?v=1682523121&width=375", "https://www.ugaoo.com/cdn/shop/products/LagosPlanter-Grey_f26c8dee-c8ce-4e1a-bec7-86006f560c98.jpg?v=1680418283&width=375"]
+    const photos = [plant1, plant2, plant3, plant4]
     const [currPhoto, setCurrPhoto] = useState(0);
     const [progress, setProgress] = useState(100);
     const [currentData, setCurrentData] = useState(1);
@@ -66,8 +70,8 @@ const Home = () => {
                             <Link as={ReactRouterLink} to="/products" _hover={{ textDecoration: "none" }}>Products</Link>
                         </Button>
                     </VStack>
-                    <VStack w={["80%", "80%", "35%"]} h={500} position={"relative"} >
-                        <Image src={photos[currPhoto]} h={500} w={"100%"} />
+                    <VStack w={["80%", "80%", "35%"]} h={"100%"} position={"relative"} border={"1px solid #426800"} borderRadius={"15px"}>
+                        <Image src={photos[currPhoto]} h={"100%"} w={"100%"} borderRadius={"15px"} />
                         <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
                             <CircularProgress value={progress} color="#426800" size="45px">
                                 <CircularProgressLabel>
@@ -75,7 +79,7 @@ const Home = () => {
                                 </CircularProgressLabel>
                             </CircularProgress>
                         </div>
-                        <HStack position={"absolute"} bottom={"1"} left={"10px"}>
+                        <HStack position={"absolute"} bottom={"2"} left={"15px"}>
                             <IconButton icon={<ChevronLeftIcon />} backgroundColor={"#426800"} color={"white"} onClick={handleDec} />
                             <IconButton icon={<ChevronRightIcon />} backgroundColor={"#426800"} color={"white"} onClick={handleInc} />
                         </HStack>
