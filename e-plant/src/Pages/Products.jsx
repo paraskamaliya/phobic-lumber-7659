@@ -1,5 +1,5 @@
 import { SearchIcon } from "@chakra-ui/icons"
-import { Box, Button, Flex, IconButton, Input, Select, SimpleGrid, Spinner, Stack } from "@chakra-ui/react"
+import { Box, Button, Flex, IconButton, Input, InputGroup, InputRightElement, Select, SimpleGrid, Spinner, Stack } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Productcard from "../Components/ProductCard";
@@ -21,6 +21,9 @@ const Products = () => {
     let url = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const fetchTheData = () => {
         setLoading(true);
+        url.searchParams.delete('title');
+        url.searchParams.delete('sortby');
+        url.searchParams.delete('order');
         if (query !== "") {
             url.searchParams.append('title', query)
             setCurrPage(1);
@@ -33,8 +36,10 @@ const Products = () => {
             url.searchParams.append('sortby', 'title')
             url.searchParams.append('order', order);
         }
-        url.searchParams.append("page", currPage);
-        url.searchParams.append('limit', 12);
+        if (query == "") {
+            url.searchParams.append("page", currPage);
+            url.searchParams.append('limit', 12);
+        }
         axios.get(url)
             .then((res) => {
                 setProductData(res.data)
@@ -59,6 +64,9 @@ const Products = () => {
     }
     let url1 = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const allthedata = () => {
+        if (query !== "") {
+            url1.searchParams.append('title', query)
+        }
         axios.get(url1)
             .then((res) => {
                 setTotalData(res.data.length);
@@ -82,8 +90,20 @@ const Products = () => {
     return (
         <Box pt={5} >
             <Stack direction={"row"} w={"70%"} m={"auto"}>
-                <Input placeholder="Search by Product Name" focusBorderColor="#426800" borderColor={"#426800"} backgroundColor={"white"} value={query} onChange={(e) => setQuery(e.target.value)} />
-                <IconButton icon={<SearchIcon />} bg="#426800" color={"white"} onClick={fetchTheData} />
+                <InputGroup>
+                    <Input placeholder="Search by Product Name" focusBorderColor="#426800" borderColor={"#426800"} backgroundColor={"white"} value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            fetchTheData();
+                            allthedata();
+                        }
+                    }} />
+                    <InputRightElement mr={1}>
+                        <IconButton icon={<SearchIcon />} boxSize={8} bg="#426800" color={"white"} onClick={() => {
+                            fetchTheData();
+                            allthedata();
+                        }} m={1} />
+                    </InputRightElement>
+                </InputGroup>
             </Stack>
             <Stack direction={["column", "column", "row"]} w={["70%", "70%", "60%"]} m={"auto"} mt={"1"}>
                 <Select placeholder="Select Sort Criteria" w={["70%", "70%", "fit-content"]} m={"auto"} focusBorderColor="#426800" borderColor={"#426800"} onChange={(e) => setSortCri(e.target.value)} backgroundColor={"white"} value={sortcri}>
