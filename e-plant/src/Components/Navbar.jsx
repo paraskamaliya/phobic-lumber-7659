@@ -13,7 +13,8 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    MenuItem
+    MenuItem,
+    MenuDivider
 } from '@chakra-ui/react'
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from "./Navbar.module.css";
@@ -53,7 +54,7 @@ function Navbar() {
         avatar = data.avatar
         name = data.name
     }
-    return <Box backgroundColor={"#fff6f4"}>
+    return <Box backgroundColor={"#edffed"}>
         <Stack direction={["column", "column", "row"]} m={"auto"} align={"center"} w={"90%"} >
             <Box>
                 <ChakraLink as={ReactRouterLink} to='/'>
@@ -61,69 +62,74 @@ function Navbar() {
                 </ChakraLink>
             </Box>
             <Spacer />
-            <Box fontSize={"larger"} display={"flex"} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"}>
-                <NavLink to={"/"} className={({ isActive }) => {
-                    return isActive ? styles.active : styles.default
-                }}>Home</NavLink>
-                <NavLink to={"/products"} className={({ isActive }) => {
-                    return isActive ? styles.active : styles.default
-                }}>Products</NavLink>
-            </Box>
-            <Spacer />
-            <Box display={"flex"} gap={"20px"} alignItems={"center"}>
-                {isAuth ? (<>
-                    <Menu>
-                        <MenuButton as={Button} rounded={'full'}
-                            variant={'link'}
-                            cursor={'pointer'} rightIcon={<ChevronDownIcon fontSize={"2xl"} />}>
-                            <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem >
-                                <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"} _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
-                                    <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<MdAccountCircle />}>Profile</Button>
-                                </ChakraLink>
-                            </MenuItem>
-                            <MenuItem >
-                                <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto" _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
-                                    <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<FaShoppingCart />}>Cart</Button>
-                                </ChakraLink>
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
-                </>
-                ) : null}
-                <Button bg={isAuth ? "red" : "#426800"} color={"white"} leftIcon={isAuth && <IoMdExit />} onClick={isAuth ? onOpen : undefined} _hover={{ bgColor: isAuth ? "red" : "#426800" }}>
-                    <NavLink to={!isAuth ? "/login" : undefined} >
-                        {isAuth ? "Logout" : "Login"}
-                    </NavLink>
-                    {isAuth && (<AlertDialog
-                        motionPreset='slideInBottom'
-                        leastDestructiveRef={cancelRef}
-                        onClose={onClose}
-                        isOpen={isOpen}
-                        isCentered
-                    >
-                        <AlertDialogOverlay />
-
-                        <AlertDialogContent>
-                            <AlertDialogHeader>Log Out</AlertDialogHeader>
-                            <AlertDialogCloseButton />
-                            <AlertDialogBody>
-                                Are you sure you want to logout?
-                            </AlertDialogBody>
-                            <AlertDialogFooter>
-                                <Button ref={cancelRef} onClick={onClose}>
-                                    No
-                                </Button>
-                                <Button colorScheme='red' ml={3} onClick={handleLogout}>
-                                    Yes
-                                </Button>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>)}
-                </Button>
-            </Box>
+            <Stack direction={["row", "row", "row"]} m={"auto"} w={["100%", "100%", "66.66%"]} justifyContent={["space-between", "space-between", "space-evenly"]} >
+                <Box fontSize={"larger"} display={"flex"} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"} >
+                    <NavLink to={"/"} className={({ isActive }) => {
+                        return isActive ? styles.active : styles.default
+                    }} >Home</NavLink>
+                    <NavLink to={"/products"} className={({ isActive }) => {
+                        return isActive ? styles.active : styles.default
+                    }}>Products</NavLink>
+                </Box>
+                <Spacer />
+                <Box display={"flex"} gap={"20px"} alignItems={"center"} >
+                    {isAuth ? (<>
+                        <Menu >
+                            <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} rightIcon={<ChevronDownIcon fontSize={"2xl"} />}>
+                                <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
+                            </MenuButton>
+                            <MenuList bg={"#d7ffd7"}>
+                                <MenuItem bg={"#d7ffd7"}>
+                                    <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"} _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
+                                        <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<MdAccountCircle />}>Profile</Button>
+                                    </ChakraLink>
+                                </MenuItem>
+                                <MenuItem bg={"#d7ffd7"}>
+                                    <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto" _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
+                                        <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<FaShoppingCart />}>Cart</Button>
+                                    </ChakraLink>
+                                </MenuItem>
+                                <MenuDivider />
+                                <MenuItem bg={"#d7ffd7"}>
+                                    <Button w={"100%"} bg={"red"} color={"white"} leftIcon={<IoMdExit />} onClick={onOpen} _hover={{ bgColor: "red" }}>
+                                        Logout
+                                        <AlertDialog
+                                            motionPreset='slideInBottom'
+                                            leastDestructiveRef={cancelRef}
+                                            onClose={onClose}
+                                            isOpen={isOpen}
+                                            isCentered
+                                        >
+                                            <AlertDialogOverlay />
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>Log Out</AlertDialogHeader>
+                                                <AlertDialogCloseButton />
+                                                <AlertDialogBody>
+                                                    Are you sure you want to logout?
+                                                </AlertDialogBody>
+                                                <AlertDialogFooter>
+                                                    <Button ref={cancelRef} onClick={onClose}>
+                                                        No
+                                                    </Button>
+                                                    <Button colorScheme='red' ml={3} onClick={handleLogout}>
+                                                        Yes
+                                                    </Button>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+                                    </Button>
+                                </MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </>
+                    ) : <Button bg={"#426800"} color={"white"} _hover={{ bgColor: "#426800" }}>
+                        <NavLink to={"/login"} >
+                            Login
+                        </NavLink>
+                    </Button>
+                    }
+                </Box>
+            </Stack>
         </Stack >
     </Box >
 }

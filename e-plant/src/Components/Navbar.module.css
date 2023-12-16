@@ -1,10 +1,14 @@
 .active {
-    text-decoration: underline;
-    color: #3A3A3A;
-    text-decoration-color: #486E00;
+    border: 1px solid #426800;
+    padding: 1%;
+    color: #486E00;
+    font-size: larger;
+    border-radius: 15px;
+    background-color: white;
 }
 
 .default {
     text-decoration: none;
     color: black;
+    font-size: larger;
 }

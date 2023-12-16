@@ -14,15 +14,18 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [load, setLoad] = useState(false);
     const toast = useToast();
     const location = useLocation();
     const navigate = useNavigate();
 
     const handleLogin = () => {
+        setLoad(true);
         if (email === "admin" && password === "admin") {
             navigate("/admin/home")
-            login()
+            login();
             localStorage.setItem("login", JSON.stringify(false));
+            setLoad(false);
         } else {
             if (checkBox) {
                 localStorage.setItem("e-PlantEmail", emailLogin);
@@ -54,6 +57,7 @@ const Login = () => {
                 .catch((err) => console.log(err))
             setEmail("");
             setPassword("");
+            setLoad(false);
         }
     }
     const handleSignup = () => {
@@ -66,6 +70,7 @@ const Login = () => {
                 isClosable: true,
             })
         }
+        setLoad(true);
         axios.post(`https://64e37895bac46e480e78da47.mockapi.io/Users`, {
             name: name,
             email: email,
@@ -95,6 +100,7 @@ const Login = () => {
                 }
             })
             .catch((err) => console.log(err))
+        setLoad(false);
     }
     return (<Tabs variant='soft-rounded' m={"auto"} w={["80%", "70%", "50%"]} isFitted mt={10}>
         <TabList>
@@ -113,7 +119,7 @@ const Login = () => {
                 <HStack m={"auto"} mt={2} w={"fit-content"}>
                     <Checkbox value={checkBox} colorScheme="white" iconColor="#426800" onChange={(e) => setCheckBox(e.target.checked)} /><label>Remember Me</label>
                 </HStack>
-                <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"}>Login</Button>
+                <Button onClick={handleLogin} mt={2} bg={"#426800"} color={"white"} isLoading={load} spinnerPlacement='start'>Login</Button>
             </TabPanel>
             <TabPanel w={["80%", "80%", "70%"]} m={"auto"} >
                 <FormControl mt={1}>
@@ -131,7 +137,7 @@ const Login = () => {
                 <FormControl mt={2}>
                     <Input value={confirmPassword} type="password" focusBorderColor="#426800" name="password" onChange={(e) => { setConfirmPassword(e.target.value) }} placeholder="Enter Confirm Password" />
                 </FormControl>
-                <Button mt={2} bg={"#426800"} color={"white"} onClick={handleSignup}>SignUp</Button>
+                <Button mt={2} bg={"#426800"} color={"white"} onClick={handleSignup} isLoading={load} spinnerPlacement='start'>SignUp</Button>
             </TabPanel>
         </TabPanels>
     </Tabs>)

@@ -118,8 +118,10 @@ const Products = () => {
                     <option value="asc">A to Z</option>
                     <option value="desc">Z to A</option>
                 </Select>
-                <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData}>Apply</Button>
-                <Button backgroundColor={"red"} color={"white"} onClick={handleReset}>Reset</Button>
+                <Stack direction={"row"} m={"auto"}>
+                    <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData} w={"fit-content"}>Apply</Button>
+                    <Button backgroundColor={"red"} color={"white"} onClick={handleReset} w={"fit-content"}>Reset</Button>
+                </Stack>
             </Stack>
             <SimpleGrid columns={["1", "1", "2", "3"]} spacing='20px' w={"80%"} m={"auto"} mt={"5"}>
                 {productData?.map((item) => {

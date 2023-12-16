@@ -8,6 +8,9 @@ import plant1 from "../Photos/plant1.jpg"
 import plant2 from "../Photos/plant2.jpg"
 import plant3 from "../Photos/plant3.jpg"
 import plant4 from "../Photos/plant4.jpg"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const Home = () => {
     const photos = [plant1, plant2, plant3, plant4]
     const [currPhoto, setCurrPhoto] = useState(0);
@@ -71,7 +74,7 @@ const Home = () => {
                         </Button>
                     </VStack>
                     <VStack w={["80%", "80%", "35%"]} h={"100%"} position={"relative"} border={"1px solid #426800"} borderRadius={"15px"}>
-                        <Image src={photos[currPhoto]} h={"100%"} w={"100%"} borderRadius={"15px"} />
+                        <LazyLoadImage effect="blur" src={photos[currPhoto]} style={{ height: "100%", width: "100%", borderRadius: "15px" }} />
                         <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
                             <CircularProgress value={progress} color="#426800" size="45px">
                                 <CircularProgressLabel>
