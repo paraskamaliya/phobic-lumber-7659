@@ -119,7 +119,7 @@ const Home = () => {
                 </Stack>
                 {popularProduct?.length !== 0 &&
                     <Box overflowX="hidden" overflowY="auto" mt={5}>
-                        <SimpleGrid columns={["1", "2", "2", "5"]}
+                        <SimpleGrid columns={["1", "1", "2", "3", "5"]}
                             gap={0.5}
                             justifyContent="center" w={"100%"} mt={5}>
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
