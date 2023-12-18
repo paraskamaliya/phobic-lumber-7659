@@ -1,6 +1,6 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Link as ReactRouterLink } from "react-router-dom"
-import { ChevronDownIcon } from "@chakra-ui/icons"
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons"
 import {
     Box, Link as ChakraLink, Image, Spacer, Stack, IconButton, Avatar, Button, AlertDialog,
     AlertDialogBody,
@@ -14,7 +14,17 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuDivider
+    MenuDivider,
+    Popover,
+    PopoverTrigger,
+    Portal,
+    PopoverContent,
+    PopoverArrow,
+    PopoverHeader,
+    PopoverCloseButton,
+    PopoverBody,
+    PopoverFooter,
+    Divider
 } from '@chakra-ui/react'
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from "./Navbar.module.css";
@@ -63,7 +73,7 @@ function Navbar() {
             </Box>
             <Spacer />
             <Stack direction={["row", "row", "row"]} m={"auto"} w={["100%", "100%", "66.66%"]} justifyContent={["space-between", "space-between", "space-evenly"]} >
-                <Box fontSize={"larger"} display={"flex"} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"} >
+                <Box fontSize={"larger"} display={{ base: "none", md: "flex" }} justifyContent={'space-evenly'} w={"50%"} alignItems={"center"} >
                     <NavLink to={"/"} className={({ isActive }) => {
                         return isActive ? styles.active : styles.default
                     }} >Home</NavLink>
@@ -71,8 +81,27 @@ function Navbar() {
                         return isActive ? styles.active : styles.default
                     }}>Products</NavLink>
                 </Box>
+                <Box display={{ base: "block", md: "none" }}>
+                    <Popover>
+                        <PopoverTrigger>
+                            <IconButton icon={<HamburgerIcon color={"white"} />} bg={"#426800"} border={"1px solid #426800"} _active={{ bg: "#426800" }} _hover={{ bg: "#426800" }} />
+                        </PopoverTrigger>
+                        <Portal >
+                            <PopoverContent m={2} bg={"#d7ffd7"} >
+                                <PopoverArrow />
+                                <PopoverHeader fontSize={"x-large"}>Menus</PopoverHeader>
+                                <PopoverCloseButton />
+                                <PopoverBody>
+                                    <Link to={"/"} style={{ fontSize: "20px", margin: "1%" }}>Home</Link>
+                                    <Divider color={"#426800"} />
+                                    <Link to={"/products"} style={{ fontSize: "20px", margin: "1%" }}>Products</Link>
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Portal>
+                    </Popover>
+                </Box>
                 <Spacer />
-                <Box display={"flex"} gap={"20px"} alignItems={"center"} >
+                <Box display={"flex"} alignItems={"center"} >
                     {isAuth ? (<>
                         <Menu >
                             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} rightIcon={<ChevronDownIcon fontSize={"2xl"} />}>
