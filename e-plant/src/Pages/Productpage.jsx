@@ -1,13 +1,15 @@
-import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Flex } from "@chakra-ui/react"
+import { Box, Image, Spinner, Stack, HStack, Heading, Text, Input, Button, IconButton, VStack, ListItem, UnorderedList, useToast, Spacer, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Flex, Textarea, Avatar } from "@chakra-ui/react"
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { MinusIcon, AddIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import Footer from "../Components/Footer";
 import { IoCartOutline } from "react-icons/io5";
+import { AuthContext } from "../Context/AuthContextProvider";
 
 const Productpage = () => {
     const [productData, setProductData] = useState([]);
+    const { isAuth } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [currImage, setCurrImage] = useState(0);
     const { id } = useParams();
@@ -18,6 +20,8 @@ const Productpage = () => {
     const toast = useToast();
     const [startIndex, setStartIndex] = useState(0);
 
+    const [comment, setComment] = useState("");
+
     const handleNext = () => {
         const nextIndex = startIndex + 1;
         setStartIndex(Math.min(nextIndex, userData.recent.length - 1));
@@ -27,17 +31,16 @@ const Productpage = () => {
         const prevIndex = startIndex - 1;
         setStartIndex(Math.max(prevIndex, 0));
     };
-    const fetchTheProduct = (id) => {
+    const fetchTheProduct = async (id) => {
         setLoading(true);
-        axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`)
-            .then((res) => {
-                setProductData(res.data)
-                setLoading(false)
-            })
-            .catch((err) => {
-                console.log(err)
-                setLoading(false)
-            })
+        try {
+            let res = await axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`)
+            setProductData(res.data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
     }
     const handleCheck = () => {
         if (pin !== "") {
@@ -98,9 +101,42 @@ const Productpage = () => {
             updateTheCart(updatedCart);
         }
     };
+
     const getTheUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
         setUserData(data);
+    }
+
+    const handleCommentPost = async () => {
+        if (comment == "") {
+            return
+        }
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const currentDate = new Date();
+
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = new Intl.DateTimeFormat('en-IN', dateOptions).format(currentDate);
+
+            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+            const formattedTime = new Intl.DateTimeFormat('en-IN', timeOptions).format(currentDate);
+            const payload = {
+                comment,
+                username: user.name,
+                date: formattedDate,
+                time: formattedTime
+            }
+            setProductData((prev) => {
+                prev.comments.push(payload);
+            })
+            setLoading(true);
+            let res = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, productData);
+            setProductData(res.data);
+            setLoading(false);
+            setComment("");
+        } catch (error) {
+            console.log(error);
+        }
     }
     useEffect(() => {
         fetchTheProduct(id);
@@ -164,12 +200,12 @@ const Productpage = () => {
                     </HStack>
                 </Box>
             </Stack>
-            <hr />
+            <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             <VStack display={"flex"} p={55}>
                 <Heading as={"h2"} fontWeight={400} >About the Product</Heading>
                 <Text w={["100%", "100%", "50%"]} textAlign={"center"}>{productData?.description}</Text>
             </VStack>
-            <hr />
+            <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             {productData?.boxImage && (
                 <Box p={10} >
                     <Stack w={"80%"} m={"auto"} gap={"10%"} direction={["column", "column", "row"]}>
@@ -189,13 +225,41 @@ const Productpage = () => {
                     </Stack>
                 </Box>
             )}
-            <hr />
+            <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
+            <Box p={2}>
+                <Heading as={"h2"} fontWeight={400} m={2}>Comments</Heading>
+                <Flex align={"center"} justifyContent={"center"} textAlign={"center"} flexDirection={"column"} w={["90%", "90%", "45%"]} m={"auto"} >
+                    <Box w={"100%"} maxHeight={"500px"} overflowY={"auto"} >
+                        {
+                            productData?.comments?.length === 0 ? <Heading p={5} color={"#426800"}>No Comments, Be the first to comment</Heading>
+                                :
+                                productData?.comments?.map((el) => {
+                                    return <HStack key={el.time} border={"1px solid black"} w={"90%"} p={3} borderRadius={"15px"} boxShadow={"lg"} m={"auto"} mb={1}>
+                                        <Avatar src={`https://bit.ly/${el.username}`} name={`${el.username}`} m={2} />
+                                        <Box w={"100%"} textAlign={"left"}>
+                                            <Text fontSize={"larger"} fontWeight={500}>{el.username}</Text>
+                                            <Text fontSize={"large"}>{el.comment}</Text>
+                                            <Text textAlign={"right"} fontWeight={300}>Posted on :- {el.date} at {el.time}</Text>
+                                        </Box>
+                                    </HStack>
+                                })
+                        }
+                    </Box>
+                    {
+                        isAuth && <Box w={"70%"} m={3}>
+                            <Textarea p={1} focusBorderColor="#426800" placeholder="Write your comment here.." value={comment} onChange={(e) => setComment(e.target.value)} />
+                            <Button textAlign={"right"} bg={"#426800"} color={"white"} onClick={handleCommentPost} m={1}>Comment</Button>
+                        </Box>
+                    }
+                </Flex>
+            </Box>
+            <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             <Box w={["80%", "80%", "60%"]} m={"auto"} p={7}>
-                <Heading color={"#426800"} mb={3}>Tips For Care</Heading>
+                <Heading as={"h2"} fontWeight={400} mb={3}>Tips For Care</Heading>
                 <Accordion allowMultiple border={"0.5px solid black"}>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
+                            <AccordionButton _expanded={{ bg: '#d7ffd7' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Water-2_2x_e01f383f-4647-47cf-a82f-31ff906cf3f3_small.png?v=1656923200" w={8} />
@@ -211,7 +275,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
+                            <AccordionButton _expanded={{ bg: '#d7ffd7' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Sunlight-2_2x_c2ce9dfa-edf9-4a1d-94fa-4e01e6baea45_small.png?v=1656923265" w={8} />
@@ -227,7 +291,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
+                            <AccordionButton _expanded={{ bg: '#d7ffd7' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Animal_2_2x_7abd45ab-b3e1-4d66-939f-1c1a4db5672d_small.png?v=1656923522" w={8} />
@@ -243,7 +307,7 @@ const Productpage = () => {
                     </AccordionItem>
                     <AccordionItem>
                         <h2>
-                            <AccordionButton _expanded={{ bg: '#426800', color: "white" }}>
+                            <AccordionButton _expanded={{ bg: '#d7ffd7' }}>
                                 <Box as="span" flex='1' textAlign='left'>
                                     <HStack>
                                         <Image src="https://www.ugaoo.com/cdn/shop/files/Maintainance-1_2x_809fc5b5-c212-4f22-803b-50241e478b2f_small.png?v=1656923507" w={8} />
@@ -259,7 +323,7 @@ const Productpage = () => {
                     </AccordionItem>
                 </Accordion>
             </Box>
-            <hr />
+            <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             {userData?.recent?.length === 0 ? "There is no visited Product" :
                 <Box w={"90%"} m={"auto"} mt={10}>
                     <Stack direction={"row"}>
