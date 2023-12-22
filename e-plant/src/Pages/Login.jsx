@@ -21,7 +21,7 @@ const Login = () => {
 
     const handleLogin = () => {
         setLoad(true);
-        if (email === "admin" && password === "admin") {
+        if (emailLogin === "admin" && passwordLogin === "admin") {
             navigate("/admin/home")
             login();
             localStorage.setItem("login", JSON.stringify(false));
@@ -33,7 +33,7 @@ const Login = () => {
             }
             axios.get(`https://64e37895bac46e480e78da47.mockapi.io/Users?email=${emailLogin}`)
                 .then((res) => {
-                    if (res.data[0].password === passwordLogin) {
+                    if (res.data[0]?.password === passwordLogin) {
                         toast({
                             title: 'Login Successful',
                             description: "We've successfully logged into your account.",

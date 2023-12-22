@@ -118,33 +118,33 @@ const Adminhome = () => {
                     <Table variant='simple'>
                         <Thead bg={"green.50"} m={"auto"}>
                             <Tr>
-                                <Th>ID</Th>
-                                <Th>Image</Th>
-                                <Th>Title</Th>
-                                <Th isNumeric>Stock</Th>
-                                <Th>Category</Th>
-                                <Th>Rating</Th>
-                                <Th>Price</Th>
-                                <Th>EDIT</Th>
-                                <Th bg={"red.500"} color={"white"}>Delete</Th>
+                                <Th textAlign={"center"}>ID</Th>
+                                <Th textAlign={"center"}>Image</Th>
+                                <Th textAlign={"center"}>Title</Th>
+                                <Th textAlign={"center"} isNumeric>Stock</Th>
+                                <Th textAlign={"center"}>Category</Th>
+                                <Th textAlign={"center"}>Rating</Th>
+                                <Th textAlign={"center"}>Price</Th>
+                                <Th textAlign={"center"}>EDIT</Th>
+                                <Th textAlign={"center"} bg={"red.500"} color={"white"}>Delete</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             {productData.length > 0 && productData.map((item) => {
                                 return <Tr key={item.id}>
-                                    <Td>{item.id}.</Td>
-                                    <Td>
-                                        <Image src={item.images[0]} w={"150px"} />
+                                    <Td textAlign={"center"}>{item.id}.</Td>
+                                    <Td textAlign={"center"} m={"auto"}>
+                                        <Image src={item.images[0]} w={"150px"} m={"auto"} />
                                     </Td>
-                                    <Td fontSize={"xl"}>{item.title}</Td>
-                                    <Td>{item.stock}</Td>
-                                    <Td>{item.category}</Td>
-                                    <Td>{item.rating}⭐</Td>
-                                    <Td>₹{item.price}</Td>
-                                    <Td>
-                                        <IconButton icon={<EditIcon />} onClick={() => handleEditClick(item)} />
+                                    <Td fontSize={"xl"} textAlign={"center"}>{item.title}</Td>
+                                    <Td textAlign={"center"}>{item.stock}</Td>
+                                    <Td textAlign={"center"}>{item.category}</Td>
+                                    <Td textAlign={"center"}>{item.rating}⭐</Td>
+                                    <Td textAlign={"center"}>₹{item.price}</Td>
+                                    <Td textAlign={"center"}>
+                                        <IconButton m={"auto"} icon={<EditIcon />} onClick={() => handleEditClick(item)} />
                                     </Td>
-                                    <Td>
+                                    <Td textAlign={"center"}>
                                         <IconButton icon={<DeleteIcon />} onClick={() => { handleDelete(item.id) }} bg={"red.500"} color={"white"} />
                                     </Td>
                                 </Tr>
