@@ -108,16 +108,14 @@ const Productpage = () => {
     }
 
     const handleCommentPost = async () => {
-        if (comment == "") {
-            return
+        if (comment === "") {
+            return;
         }
         try {
             const user = JSON.parse(localStorage.getItem("user"));
             const currentDate = new Date();
-
             const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
             const formattedDate = new Intl.DateTimeFormat('en-IN', dateOptions).format(currentDate);
-
             const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
             const formattedTime = new Intl.DateTimeFormat('en-IN', timeOptions).format(currentDate);
             const payload = {
@@ -125,19 +123,24 @@ const Productpage = () => {
                 username: user.name,
                 date: formattedDate,
                 time: formattedTime
-            }
+            };
             setProductData((prev) => {
-                prev.comments.push(payload);
-            })
+                const newData = { ...prev };
+                newData.comments = [...prev.comments, payload];
+                return newData;
+            });
             setLoading(true);
-            let res = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, productData);
+            let res = await axios.patch(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, {
+                comments: [...productData.comments, payload]
+            });
             setProductData(res.data);
             setLoading(false);
             setComment("");
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+
     useEffect(() => {
         fetchTheProduct(id);
         getTheUserData();

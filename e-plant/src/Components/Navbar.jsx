@@ -64,7 +64,7 @@ function Navbar() {
         avatar = data.avatar
         name = data.name
     }
-    return <Box backgroundColor={"#edffed"}>
+    return <Box backgroundColor={"#edffed"} borderBottom={"1px solid #426800"} p={1}>
         <Stack direction={["column", "column", "row"]} m={"auto"} align={"center"} w={"90%"} >
             <Box>
                 <ChakraLink as={ReactRouterLink} to='/'>
@@ -87,7 +87,7 @@ function Navbar() {
                             <IconButton icon={<HamburgerIcon color={"white"} />} bg={"#426800"} border={"1px solid #426800"} _active={{ bg: "#426800" }} _hover={{ bg: "#426800" }} />
                         </PopoverTrigger>
                         <Portal >
-                            <PopoverContent m={2} bg={"#d7ffd7"} >
+                            <PopoverContent m={2} bg={"rgb(244, 251, 244)"} >
                                 <PopoverArrow />
                                 <PopoverHeader fontSize={"x-large"}>Menus</PopoverHeader>
                                 <PopoverCloseButton />
@@ -107,19 +107,19 @@ function Navbar() {
                             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} rightIcon={<ChevronDownIcon fontSize={"2xl"} />}>
                                 <Avatar name={isAuth ? name : ""} src={isAuth ? avatar : "https://bit.ly/broken-link"} />
                             </MenuButton>
-                            <MenuList bg={"#d7ffd7"}>
-                                <MenuItem bg={"#d7ffd7"}>
+                            <MenuList bg={"rgb(244, 251, 244)"}>
+                                <MenuItem bg={"rgb(244, 251, 244)"}>
                                     <ChakraLink as={ReactRouterLink} to={"/profile"} m={"auto"} _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
                                         <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<MdAccountCircle />}>Profile</Button>
                                     </ChakraLink>
                                 </MenuItem>
-                                <MenuItem bg={"#d7ffd7"}>
+                                <MenuItem bg={"rgb(244, 251, 244)"}>
                                     <ChakraLink as={ReactRouterLink} to={"/cart"} m="auto" _hover={{ textDecoration: "none" }} w={"100%"} textAlign={"center"}>
                                         <Button w={"100%"} bgColor={"#426800"} color={"white"} _hover={{ bgColor: "#426800", color: "white" }} leftIcon={<FaShoppingCart />}>Cart</Button>
                                     </ChakraLink>
                                 </MenuItem>
                                 <MenuDivider />
-                                <MenuItem bg={"#d7ffd7"}>
+                                <MenuItem bg={"rgb(244, 251, 244)"}>
                                     <Button w={"100%"} bg={"red"} color={"white"} leftIcon={<IoMdExit />} onClick={onOpen} _hover={{ bgColor: "red" }}>
                                         Logout
                                         <AlertDialog
