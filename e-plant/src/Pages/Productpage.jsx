@@ -124,17 +124,30 @@ const Productpage = () => {
                 date: formattedDate,
                 time: formattedTime
             };
-            setProductData((prev) => {
-                const newData = { ...prev };
-                newData.comments = [...prev.comments, payload];
-                return newData;
-            });
-            setLoading(true);
-            let res = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, {
-                comments: [...productData.comments, payload]
-            });
-            setProductData(res.data);
-            setLoading(false);
+            let res = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, { ...productData, comments: [...productData.comments, payload] });
+            if (res.status == 200) {
+                setProductData((prev) => {
+                    const newData = { ...prev };
+                    newData.comments = [...prev.comments, payload];
+                    return newData;
+                });
+                toast({
+                    title: "Comment Posted",
+                    description: "Successfully Comment Posted",
+                    duration: 3000,
+                    isClosable: true,
+                    status: "success"
+                })
+            }
+            else {
+                toast({
+                    title: "Something went wrong",
+                    description: "Something went wrong, Please try again",
+                    duration: 3000,
+                    isClosable: true,
+                    status: "error"
+                })
+            }
             setComment("");
         } catch (error) {
             console.log(error);
@@ -237,11 +250,11 @@ const Productpage = () => {
                             productData?.comments?.length === 0 ? <Heading p={5} color={"#426800"}>No Comments, Be the first to comment</Heading>
                                 :
                                 productData?.comments?.map((el) => {
-                                    return <HStack key={el.time} border={"1px solid black"} w={"90%"} p={3} borderRadius={"15px"} boxShadow={"lg"} m={"auto"} mb={1}>
+                                    return <HStack key={el.time} w={"90%"} p={3} borderRadius={"15px"} boxShadow={"lg"} m={"auto"} mb={1}>
                                         <Avatar src={`https://bit.ly/${el.username}`} name={`${el.username}`} m={2} />
                                         <Box w={"100%"} textAlign={"left"}>
-                                            <Text fontSize={"larger"} fontWeight={500}>{el.username}</Text>
-                                            <Text fontSize={"large"}>{el.comment}</Text>
+                                            <Text fontSize={"larger"} fontWeight={700}>{el.username}</Text>
+                                            <Text fontSize={"large"} fontWeight={500}>{el.comment}</Text>
                                             <Text textAlign={"right"} fontWeight={300}>Posted on :- {el.date} at {el.time}</Text>
                                         </Box>
                                     </HStack>
@@ -250,7 +263,7 @@ const Productpage = () => {
                     </Box>
                     {
                         isAuth && <Box w={"70%"} m={3}>
-                            <Textarea p={1} focusBorderColor="#426800" placeholder="Write your comment here.." value={comment} onChange={(e) => setComment(e.target.value)} />
+                            <Textarea p={1} focusBorderColor="#426800" placeholder="Write your comment here.." value={comment} onChange={(e) => setComment(e.target.value)} borderColor={"black"} />
                             <Button textAlign={"right"} bg={"#426800"} color={"white"} onClick={handleCommentPost} m={1}>Comment</Button>
                         </Box>
                     }
