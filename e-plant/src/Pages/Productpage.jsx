@@ -130,7 +130,7 @@ const Productpage = () => {
                 return newData;
             });
             setLoading(true);
-            let res = await axios.patch(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, {
+            let res = await axios.put(`https://64e37895bac46e480e78da47.mockapi.io/Products/${id}`, {
                 comments: [...productData.comments, payload]
             });
             setProductData(res.data);
