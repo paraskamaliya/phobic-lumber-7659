@@ -8,7 +8,6 @@ import Adminhome from "../Admin Page/Adminhome";
 import Cartpage from "../Pages/Cartpage";
 import AdminUsers from "../Admin Page/AdminUsers";
 import ProductForm from "../Admin Page/ProductForm";
-import Blog from "../Pages/Blog";
 import Profile from "../Pages/Profile";
 import Checkout from "../Pages/Checkout";
 import { PrivateRoute } from "./PrivateRoute";

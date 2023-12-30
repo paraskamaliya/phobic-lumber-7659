@@ -57,7 +57,13 @@ const Login = () => {
                         })
                     }
                 })
-                .catch((err) => console.log(err))
+                .catch(() => toast({
+                    title: 'Login Failed',
+                    description: "Please Check Your Credentials.",
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                }))
             setEmail("");
             setPassword("");
             setLoad(false);
@@ -102,7 +108,13 @@ const Login = () => {
                     });
                 }
             })
-            .catch((err) => console.log(err))
+            .catch(() => toast({
+                title: 'Account is not created',
+                description: "We are facing some technical issue, Please try again after some time.",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            }))
         setLoad(false);
     }
     return (

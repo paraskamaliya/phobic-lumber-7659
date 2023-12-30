@@ -80,7 +80,7 @@ const Products = () => {
         allthedata();
     }, [currPage, render])
     if (loading) {
-        return <Flex height="80vh" align="center" justify="center">
+        return <Flex height="90vh" align="center" justify="center" bg={"#fff6f4"}>
             <Spinner size={"xl"} thickness="5px" color="#426800" speed='0.65s' />
         </Flex>
     }
@@ -88,7 +88,7 @@ const Products = () => {
         return <ErrorIndicator />
     }
     return (
-        <Box pt={5} >
+        <Box pt={5} bg={"#fff6f4"}>
             <Stack direction={"row"} w={"70%"} m={"auto"}>
                 <InputGroup>
                     <Input placeholder="Search by Product Name" focusBorderColor="#426800" borderColor={"#426800"} backgroundColor={"white"} value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => {

@@ -62,16 +62,16 @@ const Cartpage = () => {
     }, []);
     if (cartData.length == 0) {
     }
-    return <Box>
+    return <Box minHeight={"90vh"} bg={"#fff6f4"}>
         {
             cartData.length == 0 ?
                 <Flex height={"83vh"} alignItems={"center"} justifyContent={"center"}>
                     <Heading color={"#426800"} >Oops! Your cart is empty.</Heading>
                 </Flex> :
-                <Box mt={5}>
-                    <Heading color={"#426800"}>Cart Page</Heading>
-                    <TableContainer>
-                        <Table mt={5}>
+                <Box>
+                    <Heading color={"#426800"} p={3}>Cart Page</Heading>
+                    <TableContainer w={"90%"} m={"auto"} borderRadius={"15px"} mt={5} border={"1px solid #426800"}>
+                        <Table >
                             <Thead>
                                 <Tr bg={"green.50"}>
                                     <Th textAlign={"center"}>ID</Th>
@@ -86,7 +86,7 @@ const Cartpage = () => {
                             </Thead>
                             <Tbody>
                                 {cartData.map((product) => (
-                                    <Tr textAlign={"center"} alignItems={"center"} key={product.id}>
+                                    <Tr textAlign={"center"} alignItems={"center"} key={product.id} bg={"white"}>
                                         <Td textAlign={"center"}>{product.id}.</Td>
                                         <Td justifySelf={"center"}>
                                             <Image m="auto" src={product.image} alt={product.title} h={"100"} w={"100"} />

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardFooter, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react"
+import { Avatar, Box, Button, Card, CardFooter, CardHeader, Divider, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, Textarea } from "@chakra-ui/react"
 import { useState } from "react";
 
 const Profile = () => {
@@ -38,17 +38,26 @@ const Profile = () => {
             console.error("Error:", error);
         }
     };
-    return <>
-        <Box justifyContent={"center"} w={["80%","80%","50%"]} m={"auto"} mt={5}>
-            <Heading color={"#426800"}>Your Profile</Heading>
-            <Card mt={5} alignItems={"center"} lineHeight={10}>
-                <Avatar name={data.name} src={data.avatar} m={"auto"} />
-                <Text fontSize={"2xl"}>{data.name}</Text>
-                <Text fontSize={"xl"}>{data.email}</Text>
-                <Text fontSize={"xl"}>{data.password}</Text>
-                <Text fontSize={"xl"}>{data.address}</Text>
+    return <Flex h={"90vh"} alignItems={"center"} bg={"#fff6f4"}>
+        <Box justifyContent={"center"} w={["80%", "80%", "50%"]} m={"auto"} mt={5}>
+            <Card mt={5} lineHeight={10} bg={"rgb(244, 251, 244)"} boxShadow={"lg"}>
+                <CardHeader>
+                    <Heading color={"#426800"}>My Profile</Heading>
+                </CardHeader>
+                <Divider w={"80%"} m={"auto"} mb={5} />
+                <Box w={"80%"} m={"auto"}>
+                    <Avatar name={data.name} src={data.avatar} m={"auto"} />
+                    <Text textAlign={"left"}>Name :-</Text>
+                    <Input value={data.name} isReadOnly focusBorderColor="#426800" />
+                    <Text textAlign={"left"}>Email :-</Text>
+                    <Input value={data.email} isReadOnly focusBorderColor="#426800" />
+                    <Text textAlign={"left"}>Password :-</Text>
+                    <Input value={data.password} isReadOnly focusBorderColor="#426800" />
+                    <Text textAlign={"left"}>Address :-</Text>
+                    <Textarea value={data.address} isReadOnly focusBorderColor="#426800" />
+                </Box>
                 <CardFooter>
-                    <Button bg={"#426800"} color={"white"} onClick={handleEditClick}>Edit Profile</Button>
+                    <Button bg={"#426800"} m={"auto"} color={"white"} onClick={handleEditClick}>Edit Profile</Button>
                 </CardFooter>
             </Card>
             <Modal isOpen={isEditing} onClose={handleModalClose}>
@@ -74,12 +83,12 @@ const Profile = () => {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Profile Picture</FormLabel>
-                            <input type="file" accept="image/*" color="#426800" onChange={handleFileChange} focusBorderColor="#426800"/>
+                            <input type="file" accept="image/*" color="#426800" onChange={handleFileChange} focusBorderColor="#426800" />
                             {editedData.avatar && <Avatar name={editedData.name} src={editedData.avatar} size="xl" mt={3} />}
                         </FormControl>
                         <FormControl mt={3}>
                             <FormLabel>Address</FormLabel>
-                            <Input
+                            <Textarea
                                 value={editedData.address}
                                 focusBorderColor="#426800"
                                 onChange={(e) => setEditedData({ ...editedData, address: e.target.value })}
@@ -100,6 +109,6 @@ const Profile = () => {
                 </ModalContent>
             </Modal>
         </Box>
-    </>
+    </Flex>
 }
 export default Profile
