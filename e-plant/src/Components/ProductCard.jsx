@@ -108,7 +108,7 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
     };
 
     return (
-        <Card boxShadow={"lg"}>
+        <Card boxShadow={"lg"} borderRadius={"15px"} _hover={{ boxShadow: "0px 3px 4px #4b4b4b", borderRadius: "0", transition: "all 0.5s ease-in-out" }}>
             <CardBody mb={"auto"} onClick={() => handlerecent(id)} position={"relative"}>
                 <Link as={ReactRouterDom} textDecoration="none" _hover={{ textDecoration: "none" }}>
                     <Image src={images[0]} h="400px" m={"auto"} justifySelf={"center"} />
@@ -120,8 +120,8 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
                     <Text textAlign="left" fontSize="md" fontWeight={500}>₹ {price}</Text>
                 </Link>
             </CardBody>
-            <CardFooter mt={"auto"}>
-                <Button bg="#426800" leftIcon={<IoCartOutline />} color="white" onClick={() => handleClick(id, 1)}>Add to Cart</Button>
+            <CardFooter mt={"auto"} w={"fit-content"}>
+                <Button w={"fit-content"} bg="#426800" leftIcon={<IoCartOutline size={"1.5rem"} />} color="white" onClick={() => handleClick(id, 1)}>Add to Cart</Button>
             </CardFooter>
         </Card>
     );

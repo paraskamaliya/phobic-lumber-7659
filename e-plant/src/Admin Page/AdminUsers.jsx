@@ -64,21 +64,21 @@ const AdminUsers = () => {
                     <Table variant='simple'>
                         <Thead bg={"green.50"} m={"auto"}>
                             <Tr>
-                                <Th>ID</Th>
-                                <Th>Name</Th>
-                                <Th>Email</Th>
-                                <Th>Address</Th>
-                                <Th bg={"red.500"} color={"white"}>Delete</Th>
+                                <Th textAlign={"center"}>ID</Th>
+                                <Th textAlign={"center"}>Name</Th>
+                                <Th textAlign={"center"}>Email</Th>
+                                <Th textAlign={"center"}>Address</Th>
+                                <Th textAlign={"center"} bg={"red.500"} color={"white"}>Delete</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             {data.length > 0 && data.map((item) => {
                                 return <Tr key={item.id}>
-                                    <Td>{item.id}.</Td>
-                                    <Td>{item.name}</Td>
-                                    <Td>{item.email}</Td>
-                                    <Td>{item.address}</Td>
-                                    <Td>
+                                    <Td textAlign={"center"}>{item.id}.</Td>
+                                    <Td textAlign={"center"}>{item.name}</Td>
+                                    <Td textAlign={"center"}>{item.email}</Td>
+                                    <Td textAlign={"center"}>{item.address}</Td>
+                                    <Td textAlign={"center"}>
                                         <IconButton icon={<DeleteIcon />} onClick={() => { handleDelete(item.id) }} bg={"red.500"} color={"white"} />
                                     </Td>
                                 </Tr>

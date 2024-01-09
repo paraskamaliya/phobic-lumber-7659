@@ -183,9 +183,9 @@ const Productpage = () => {
                 </Box>
                 <Box w={["100%", "100%", "50%"]} textAlign={"left"} pt={10} pl={1}>
                     <Heading as={"h2"} mb={3} fontWeight={500}>{productData?.title}</Heading>
-                    <Text fontSize={"xl"} mb={3}>{productData?.rating}⭐</Text>
-                    <Text fontSize={"xl"} color="#159354" fontWeight={500} mb={3}>₹{productData?.price}</Text>
-                    <Text fontSize={"xl"} mb={3}>{productData?.category}</Text>
+                    <Text fontSize={"xl"} mb={3} fontWeight={500}>{productData?.rating}⭐</Text>
+                    <Text fontSize={"2xl"} color="#159354" fontWeight={500} mb={3}><span style={{ fontSize: "15px", textDecoration: "line-through", color: "gray" }}>₹{productData.oriPrice}</span> ₹{productData?.price}</Text>
+                    <Text fontSize={"xl"} mb={3}>Category :- {productData?.category}</Text>
                     <Text letterSpacing={1}>CHECK DELIVERY</Text>
                     <HStack gap={0} w={"80%"}>
                         <Input placeholder="Enter PIN Code" borderRadius={0} variant='flushed' type="number" value={pin} onChange={(e) => setPin(e.target.value)} focusBorderColor="#426800" />

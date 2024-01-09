@@ -7,6 +7,7 @@ const ProductForm = () => {
     const navigate = useNavigate();
     const [newData, setNewData] = useState({
         title: "",
+        oriPrice: "",
         price: "",
         stock: "",
         category: "",
@@ -67,7 +68,9 @@ const ProductForm = () => {
             <VStack w={"60%"} m={"auto"} mt={5}>
                 <Input placeholder="Enter Title of Product" value={newData.title} focusBorderColor="#426800" name="title" onChange={(e) => handleChange(e)} isRequired />
 
-                <Input isRequired placeholder="Enter Price of Product" focusBorderColor="#426800" value={newData.price} type="number" name="price" onChange={(e) => handleChange(e)} />
+                <Input isRequired placeholder="Enter Original Price of Product" focusBorderColor="#426800" value={newData.oriPrice} type="number" name="oriPrice" onChange={(e) => handleChange(e)} />
+
+                <Input isRequired placeholder="Enter Discounted Price of Product" focusBorderColor="#426800" value={newData.price} type="number" name="price" onChange={(e) => handleChange(e)} />
 
                 <Input isRequired placeholder="Enter Stock of Product" focusBorderColor="#426800" value={newData.stock} name="stock" onChange={(e) => handleChange(e)} />
 
