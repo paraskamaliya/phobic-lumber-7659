@@ -53,7 +53,7 @@ const Products = () => {
             url.searchParams.append('order', order);
             updatedSearchParams.set('alphabeticOrder', order);
         }
-        if (query == "") {
+        if (query === "") {
             url.searchParams.append("page", currPage);
             url.searchParams.append('limit', limit);
             updatedSearchParams.set("page", currPage);
@@ -81,7 +81,7 @@ const Products = () => {
         setSortCri("");
         setSortOrd("");
         setOrder("");
-        setRender(prev => prev == true ? false : true)
+        setRender(prev => prev === true ? false : true)
     }
     let url1 = new URL("https://64e37895bac46e480e78da47.mockapi.io/Products");
     const allthedata = () => {
@@ -137,7 +137,7 @@ const Products = () => {
             <Stack direction={["column", "column", "row"]} w={["70%", "70%", "60%"]} m={"auto"} mt={"1"}>
                 <Select placeholder="Select Sort Criteria" w={["70%", "70%", "fit-content"]} m={"auto"} focusBorderColor="#426800" borderColor={"#426800"} backgroundColor={"white"} value={sortcri} onChange={(e) => {
                     setSortCri(e.target.value)
-                    if (e.target.value == "") {
+                    if (e.target.value === "") {
                         const { sortcri, ...updatedSearchParams } = searchParams;
                         setSearchParams(updatedSearchParams);
                     }
@@ -150,7 +150,7 @@ const Products = () => {
                 </Select>
                 <Select placeholder="Select Sorting Order" w={["70%", "70%", "fit-content"]} m={"auto"} borderColor={"#426800"} focusBorderColor="#426800" backgroundColor={"white"} value={sortOrd} onChange={(e) => {
                     setSortOrd(e.target.value)
-                    if (e.target.value == "") {
+                    if (e.target.value === "") {
                         const { sortOrd, ...updatedSearchParams } = searchParams;
                         setSearchParams(updatedSearchParams);
                     }
@@ -163,7 +163,7 @@ const Products = () => {
                 </Select>
                 <Select placeholder="Select for Alphabetic Order" w={["70%", "70%", "fit-content"]} focusBorderColor="#426800" m={"auto"} borderColor={"#426800"} value={order} backgroundColor={"white"} onChange={(e) => {
                     setOrder(e.target.value)
-                    if (e.target.value == "") {
+                    if (e.target.value === "") {
                         const { alphabeticOrder, ...updatedSearchParams } = searchParams;
                         setSearchParams(updatedSearchParams);
                     }
