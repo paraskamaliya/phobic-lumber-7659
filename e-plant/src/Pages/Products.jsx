@@ -101,7 +101,7 @@ const Products = () => {
                         <IconButton icon={<SearchIcon />} boxSize={8} bg="#426800" color={"white"} onClick={() => {
                             fetchTheData();
                             allthedata();
-                        }} m={1} />
+                        }} m={1} _hover={{ backgroundColor: "none" }} />
                     </InputRightElement>
                 </InputGroup>
             </Stack>
@@ -119,8 +119,8 @@ const Products = () => {
                     <option value="desc">Z to A</option>
                 </Select>
                 <Stack direction={"row"} m={"auto"}>
-                    <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData} w={"fit-content"}>Apply</Button>
-                    <Button backgroundColor={"red"} color={"white"} onClick={handleReset} w={"fit-content"}>Reset</Button>
+                    <Button backgroundColor={"#426800"} color={"white"} onClick={fetchTheData} w={"fit-content"} _hover={{ backgroundColor: "none" }}>Apply</Button>
+                    <Button backgroundColor={"red"} color={"white"} onClick={handleReset} w={"fit-content"} _hover={{ backgroundColor: "none" }}>Reset</Button>
                 </Stack>
             </Stack>
             <SimpleGrid columns={["1", "1", "2", "3"]} spacing='20px' w={"80%"} m={"auto"} mt={"5"}>

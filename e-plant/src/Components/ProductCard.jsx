@@ -121,7 +121,7 @@ const ProductCard = ({ images, title, rating, price, id, popular, category }) =>
                 </Link>
             </CardBody>
             <CardFooter mt={"auto"} w={"fit-content"}>
-                <Button w={"fit-content"} bg="#426800" leftIcon={<IoCartOutline size={"1.5rem"} />} color="white" onClick={() => handleClick(id, 1)}>Add to Cart</Button>
+                <Button w={"fit-content"} bg="#426800" leftIcon={<IoCartOutline size={"1.5rem"} />} color="white" onClick={() => handleClick(id, 1)} _hover={{ backgroundColor: "none" }}>Add to Cart</Button>
             </CardFooter>
         </Card>
     );

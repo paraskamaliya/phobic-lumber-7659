@@ -186,17 +186,17 @@ const Productpage = () => {
                     <Text fontSize={"xl"} mb={3} fontWeight={500}>{productData?.rating}⭐</Text>
                     <Text fontSize={"2xl"} color="#159354" fontWeight={500} mb={3}><span style={{ fontSize: "15px", textDecoration: "line-through", color: "gray" }}>₹{productData.oriPrice}</span> ₹{productData?.price}</Text>
                     <Text fontSize={"xl"} mb={3}>Category :- {productData?.category}</Text>
-                    <Text letterSpacing={1}>CHECK DELIVERY</Text>
+                    <Text letterSpacing={1} fontWeight={500}>CHECK DELIVERY</Text>
                     <HStack gap={0} w={"80%"}>
                         <Input placeholder="Enter PIN Code" borderRadius={0} variant='flushed' type="number" value={pin} onChange={(e) => setPin(e.target.value)} focusBorderColor="#426800" />
-                        <Button borderRadius={0} bg={"#426800"} color={"white"} letterSpacing={1} onClick={(e) => handleCheck(e)}>CHECK</Button>
+                        <Button borderRadius={0} bg={"#426800"} color={"white"} letterSpacing={1} onClick={(e) => handleCheck(e)} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }}>CHECK</Button>
                     </HStack>
                     <Text mb={4} color={estiDeli === "Please Enter Pin Code" ? "red" : "green"}>{estiDeli}</Text>
                     <HStack >
-                        <IconButton isDisabled={qty === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty - 1)} />
+                        <IconButton isDisabled={qty === 1} icon={<MinusIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty - 1)} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }} />
                         <Text>{qty}</Text>
-                        <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty + 1)} />
-                        <Button bg={"#426800"} color={"white"} leftIcon={<IoCartOutline />} onClick={() => handleClick(id, qty)}>Add to Cart</Button>
+                        <IconButton icon={<AddIcon />} borderRadius={50} bg={"#426800"} color={"white"} onClick={() => setQty(qty + 1)} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }} />
+                        <Button bg={"#426800"} color={"white"} leftIcon={<IoCartOutline />} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }} onClick={() => handleClick(id, qty)}>Add to Cart</Button>
                     </HStack>
                     <HStack w={"80%"} mt={4} textAlign={"center"} alignContent={"center"}>
                         <Box w={"20%"} alignItems={"center"} justifyContent={"center"}>
@@ -219,7 +219,7 @@ const Productpage = () => {
             <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             <VStack display={"flex"} p={55}>
                 <Heading as={"h2"} fontWeight={400} >About the Product</Heading>
-                <Text w={["100%", "100%", "50%"]} textAlign={"center"}>{productData?.description}</Text>
+                <Text w={["100%", "100%", "50%"]} textAlign={"center"} fontSize={"xl"}>{productData?.description}</Text>
             </VStack>
             <hr style={{ border: "1px solid #426800", width: "90%", margin: "auto" }} />
             {productData?.boxImage && (
@@ -233,7 +233,7 @@ const Productpage = () => {
                             <UnorderedList>
                                 {
                                     productData?.boxContent.length > 0 && productData.boxContent.map((item) => {
-                                        return <ListItem key={item} fontWeight={400}>{item}</ListItem>
+                                        return <ListItem key={item} fontWeight={400} fontSize={"xl"}>{item}</ListItem>
                                     })
                                 }
                             </UnorderedList>
@@ -264,7 +264,7 @@ const Productpage = () => {
                     {
                         isAuth && <Box w={"70%"} m={3}>
                             <Textarea p={1} focusBorderColor="#426800" placeholder="Write your comment here.." value={comment} onChange={(e) => setComment(e.target.value)} borderColor={"black"} />
-                            <Button textAlign={"right"} bg={"#426800"} color={"white"} onClick={handleCommentPost} m={1}>Comment</Button>
+                            <Button textAlign={"right"} bg={"#426800"} color={"white"} onClick={handleCommentPost} m={1} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }}>Comment</Button>
                         </Box>
                     }
                 </Flex>
@@ -285,7 +285,7 @@ const Productpage = () => {
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4} textAlign={"left"}>
+                        <AccordionPanel pb={4} textAlign={"left"} fontSize={"lg"}>
                             Always check your plants before watering, the topsoil should be dry to touch. For succulents allow the potting mix to dry completely before watering again.
                         </AccordionPanel>
                     </AccordionItem>
@@ -301,7 +301,7 @@ const Productpage = () => {
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4} textAlign={"left"}>
+                        <AccordionPanel pb={4} textAlign={"left"} fontSize={"lg"}>
                             Place your plants on window sills where it can get the brightest possible indirect light. Bright indirect light is when the plant is within a couple of feet of a natural source of light.
                         </AccordionPanel>
                     </AccordionItem>
@@ -317,7 +317,7 @@ const Productpage = () => {
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4} textAlign={"left"}>
+                        <AccordionPanel pb={4} textAlign={"left"} fontSize={"lg"}>
                             This plant and your furry friends cannot become the best buds.
                         </AccordionPanel>
                     </AccordionItem>
@@ -333,7 +333,7 @@ const Productpage = () => {
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
-                        <AccordionPanel pb={4} textAlign={"left"}>
+                        <AccordionPanel pb={4} textAlign={"left"} fontSize={"lg"}>
                             The plant needs a knowing eye of a gardener to understand what it needs. Fairly easy to grow if you take care of their set of requirements.
                         </AccordionPanel>
                     </AccordionItem>
@@ -346,8 +346,8 @@ const Productpage = () => {
                         <Heading textAlign={"left"} color={"#426800"}>Recent Visited Products</Heading>
                         <Spacer />
                         <HStack>
-                            <IconButton icon={<ChevronLeftIcon />} backgroundColor={"#426800"} color={"white"} onClick={handlePrev} isDisabled={startIndex === 0} />
-                            <IconButton icon={<ChevronRightIcon />} backgroundColor={"#426800"} color={"white"} onClick={handleNext} isDisabled={startIndex + 5 >= userData.recent?.length} />
+                            <IconButton icon={<ChevronLeftIcon />} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }} backgroundColor={"#426800"} color={"white"} onClick={handlePrev} isDisabled={startIndex === 0} />
+                            <IconButton icon={<ChevronRightIcon />} _hover={{ backgroundColor: "#629608", transition: "all 0.5s ease-in-out" }} backgroundColor={"#426800"} color={"white"} onClick={handleNext} isDisabled={startIndex + 5 >= userData.recent?.length} />
                         </HStack>
                     </Stack>
                     <Box overflowX="hidden" overflowY="auto" mt={5}>

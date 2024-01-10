@@ -2,7 +2,7 @@ import { Box, Stack, Text, Image, HStack, Link, Spacer } from "@chakra-ui/react"
 import { FiInstagram } from "react-icons/fi"
 import { FaTelegram } from "react-icons/fa"
 const Footer = () => {
-    return <Box w={"100%"} m={"auto"} mt={20} borderTop={"1px"} borderTopColor={"#426800"} p={10} bgColor={"#fff6f4"}>
+    return <Box w={"100%"} m={"auto"} mt={20} borderTop={"1px"} borderTopColor={"#426800"} p={10} backgroundColor={"#edffed"}>
         <Stack direction={["column", "column", "row"]} m={"auto"}>
             <Box lineHeight={"10"} textAlign={"center"}>
                 <Image src="https://i.postimg.cc/VNJc4J4q/E-Plant-removebg-preview1.png" w={"80px"} h={"80px"} m={"auto"} />

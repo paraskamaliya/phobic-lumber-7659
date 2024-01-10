@@ -123,7 +123,7 @@ const Home = () => {
                             gap={2}
                             justifyContent="center" w={"100%"} mt={5}>
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
-                                return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none" }} to={`products/${item.id}`} key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"} >
+                                return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none", transform: "scale(0.95)", transition: "all 0.3s ease-in-out" }} to={`products/${item.id}`} key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"} >
                                     <Box bg={"white"} borderRadius={"15px"}>
                                         <Image src={item.images[0]} w={"100%"} h={300} borderRadius={"15px 15px 0px 0px"} boxShadow={"lg"} />
                                         <Box boxShadow={"lg"}>
