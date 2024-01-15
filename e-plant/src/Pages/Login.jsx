@@ -1,5 +1,5 @@
 import { Tab, Tabs, TabList, TabPanel, TabPanels, FormControl, Input, Button, useToast, Checkbox, HStack, InputGroup, InputRightElement, IconButton, Flex } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../Context/AuthContextProvider"
 import axios from "axios";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -29,6 +29,7 @@ const Login = () => {
             login();
             localStorage.setItem("login", JSON.stringify(false));
             setLoad(false);
+            
         } else {
             if (checkBox) {
                 localStorage.setItem("e-PlantEmail", emailLogin);
@@ -117,6 +118,10 @@ const Login = () => {
             }))
         setLoad(false);
     }
+
+    useEffect(() => {
+        document.title = "Login Page | E-Plant"
+    }, [])
     return (
         <Flex height={"91vh"} bg={"#fff6f4"} >
             <Tabs variant='soft-rounded' m={"auto"} w={["90%", "80%", "60%"]} isFitted mt={10} boxShadow={"xl"} p={"5%"} borderRadius={"lg"} bg={"rgb(244, 251, 244)"}>

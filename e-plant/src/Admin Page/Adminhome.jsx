@@ -60,6 +60,7 @@ const Adminhome = () => {
     useEffect(() => {
         fetchTheData();
         allthedata();
+        document.title = "Admin | E-Plant"
     }, [page])
     const handleInputChange = (e) => {
         setEditedProduct({

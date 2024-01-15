@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Card, CardFooter, CardHeader, Divider, Flex, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, Textarea } from "@chakra-ui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
     const data = JSON.parse(localStorage.getItem("user"))
@@ -38,6 +38,9 @@ const Profile = () => {
             console.error("Error:", error);
         }
     };
+    useEffect(() => {
+        document.title = data.name
+    }, [])
     return <Flex h={"90vh"} alignItems={"center"} bg={"#fff6f4"}>
         <Box justifyContent={"center"} w={["80%", "80%", "50%"]} m={"auto"} mt={5}>
             <Card mt={5} lineHeight={10} bg={"rgb(244, 251, 244)"} boxShadow={"lg"}>

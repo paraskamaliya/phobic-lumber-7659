@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Input, VStack, useToast } from "@chakra-ui/react"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 const ProductForm = () => {
     const toast = useToast();
@@ -62,6 +62,9 @@ const ProductForm = () => {
             })
             .catch((err) => console.log(err))
     }
+    useEffect(() => {
+        document.title = "Product Form | E-Plant"
+    }, [])
     return (
         <Box mt={5}>
             <Heading color="#426800">Add new Product</Heading>

@@ -54,6 +54,7 @@ const Home = () => {
         }
     }
     useEffect(() => {
+        document.title = "Home Page | E-Plant"
         fetchPopular();
         const interval = setInterval(() => {
             handleInc();

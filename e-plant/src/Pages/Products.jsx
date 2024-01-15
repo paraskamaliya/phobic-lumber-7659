@@ -97,6 +97,7 @@ const Products = () => {
             })
     }
     useEffect(() => {
+        document.title = "Products | E-Plant"
         fetchTheData();
         allthedata();
     }, [currPage, render])
