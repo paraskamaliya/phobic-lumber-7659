@@ -11,4 +11,33 @@
     text-decoration: none;
     color: black;
     font-size: larger;
+    position: relative;
+}
+
+.default::after {
+    content: "";
+    position: absolute;
+    width: fit-content;
+    bottom: 0;
+    height: 2px;
+    left: 0;
+    background-color: black;
+}
+
+.default:hover::after {
+    animation-name: lineanime;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes lineanime {
+    0% {
+        width: 0%;
+        left: 0;
+    }
+
+    100% {
+        width: 100%;
+        left: 0;
+    }
 }
