@@ -81,7 +81,7 @@ const Checkout = () => {
         setAmount(storedAmount || 0);
         let data = JSON.parse(localStorage.getItem("user"))
         setUserData(data);
-        document.title = "Payment Page | E-Plant"
+        document.title = "Payment | E-Plant"
     }, []);
     return <Box minHeight={"90vh"} bg={"#fff6f4"}>
         <Stack direction={["column", "column", "row"]} w={"100%"} pt={5}>

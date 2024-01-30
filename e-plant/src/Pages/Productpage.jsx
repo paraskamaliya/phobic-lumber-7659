@@ -155,7 +155,7 @@ const Productpage = () => {
     };
 
     useEffect(() => {
-        document.title = "Product Page | E-Plant"
+        document.title = "Product | E-Plant"
         fetchTheProduct(id);
         getTheUserData();
     }, [id])

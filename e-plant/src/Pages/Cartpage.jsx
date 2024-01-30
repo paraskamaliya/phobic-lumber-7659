@@ -59,7 +59,7 @@ const Cartpage = () => {
     useEffect(() => {
         fetchCartData();
         let amount = calculateTotalAmount();
-        document.title = "Cart Page | E-Plant"
+        document.title = "Cart | E-Plant"
     }, []);
     if (cartData.length == 0) {
     }

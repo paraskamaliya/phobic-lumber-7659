@@ -8,8 +8,9 @@ import plant1 from "../Photos/plant1.jpg"
 import plant2 from "../Photos/plant2.jpg"
 import plant3 from "../Photos/plant3.jpg"
 import plant4 from "../Photos/plant4.jpg"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Home = () => {
     const photos = [plant1, plant2, plant3, plant4]
@@ -54,7 +55,11 @@ const Home = () => {
         }
     }
     useEffect(() => {
-        document.title = "Home Page | E-Plant"
+        AOS.init({
+            duration: 1000
+        });
+        AOS.refresh();
+        document.title = "Home | E-Plant"
         fetchPopular();
         const interval = setInterval(() => {
             handleInc();
@@ -65,7 +70,7 @@ const Home = () => {
     }, [currPhoto])
     return (
         <Box pt={2} bg={"#fff6f4"}>
-            <Box w={"100%"}>
+            <Box w={"100%"} data-aos="fade-right">
                 <Stack direction={["column", "column", "row"]} align={"center"} justifyContent={"space-evenly"}>
                     <VStack w={["80%", "80%", "30%"]} textAlign={"left"} ml={["0px", "0px", "150px"]} size="3xl" align={"left"}>
                         <Heading color="#426800" size="2xl" >Create a green paradise right at home</Heading>
@@ -75,7 +80,7 @@ const Home = () => {
                         </Button>
                     </VStack>
                     <VStack w={["80%", "80%", "35%"]} h={"100%"} position={"relative"} border={"1px solid #426800"} borderRadius={"15px"}>
-                        <LazyLoadImage effect="blur" src={photos[currPhoto]} style={{ height: "100%", width: "100%", borderRadius: "15px" }} />
+                        <Image src={photos[currPhoto]} style={{ height: "100%", width: "100%", borderRadius: "15px" }} />
                         <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
                             <CircularProgress value={progress} color="#426800" size="45px">
                                 <CircularProgressLabel>
@@ -90,7 +95,7 @@ const Home = () => {
                     </VStack>
                 </Stack>
             </Box>
-            <Box w={"80%"} h={"fit-content"} m={"auto"} mt={10}>
+            <Box w={"80%"} h={"fit-content"} m={"auto"} mt={10} data-aos="fade-left">
                 <Stack direction={["column-reverse", "column", "row"]} align={"center"} gap={"10%"} h={"fit-content"} >
                     <Stack direction={"row"} w={["80%", "80%", "50%"]} m={"auto"} >
                         <Box h={"300px"} w={"200px"} >
@@ -109,7 +114,7 @@ const Home = () => {
                     </Box>
                 </Stack>
             </Box>
-            <Box w={"80%"} m={"auto"} mt={"10"} >
+            <Box w={"80%"} m={"auto"} mt={"10"} data-aos="fade-right">
                 <Stack direction={["column", "column", "row"]} m={"auto"}>
                     <Heading color={"#426800"}>Popular Products</Heading>
                     <Spacer />
@@ -142,7 +147,7 @@ const Home = () => {
                     <Link as={ReactRouterLink} to={"/products"} _hover={{ textDecoration: "none" }}>See All</Link>
                 </Button>
             </Box>
-            <Box w={"80%"} h={"fit-content"} m={"auto"} mt={10}>
+            <Box w={"80%"} h={"fit-content"} m={"auto"} mt={10} data-aos="fade-left">
                 <Stack direction={["column-reverse", "column", "row"]} align={"center"} gap={"10%"} h={"fit-content"} >
                     <Box align={"left"} w={["80%", "80%", "50%"]}>
                         <Heading color="#426800" size="2xl" textDecoration={"underline"}>Delivery & Payment</Heading>

@@ -120,7 +120,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        document.title = "Login Page | E-Plant"
+        document.title = "Login  E-Plant"
     }, [])
     return (
         <Flex height={"91vh"} bg={"#fff6f4"} >
