@@ -16,7 +16,6 @@ const Home = () => {
     const photos = [plant1, plant2, plant3, plant4]
     const [currPhoto, setCurrPhoto] = useState(0);
     const [progress, setProgress] = useState(100);
-    const [currentData, setCurrentData] = useState(1);
     const [popularProduct, setPopularProduct] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
 
