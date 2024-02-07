@@ -55,7 +55,8 @@ const Home = () => {
     }
     useEffect(() => {
         AOS.init({
-            duration: 1000
+            duration: 1000,
+            once: true
         });
         AOS.refresh();
         document.title = "Home | E-Plant"

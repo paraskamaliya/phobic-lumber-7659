@@ -61,8 +61,6 @@ const Cartpage = () => {
         let amount = calculateTotalAmount();
         document.title = "Cart | E-Plant"
     }, []);
-    if (cartData.length == 0) {
-    }
     return <Box minHeight={"90vh"} bg={"#fff6f4"}>
         {
             cartData.length == 0 ?
