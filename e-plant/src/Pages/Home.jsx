@@ -99,11 +99,11 @@ const Home = () => {
                 <Stack direction={["column-reverse", "column", "row"]} align={"center"} gap={"10%"} h={"fit-content"} >
                     <Stack direction={"row"} w={["80%", "80%", "50%"]} m={"auto"} >
                         <Box h={"300px"} w={"200px"} >
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Red_9aedd671-5735-461d-9067-58b2d9766713.jpg?v=1688617208&width=375" h={"149px"} w={"200px"} borderRadius={"15px"} border={"1px solid #426800"} />
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/AtlantisPlanter-PastelPink_b9cb7567-785a-464c-88f9-d5282d4668d1.jpg?v=1680427445&width=375" h={"149px"} w={"200px"} borderRadius={"15px"} border={"1px solid #426800"} mt={"2px"} />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Red_9aedd671-5735-461d-9067-58b2d9766713.jpg?v=1688617208&width=375" h={"149px"} w={"200px"} borderRadius={"15px"} border={"1px solid #426800"} loading="lazy" />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/AtlantisPlanter-PastelPink_b9cb7567-785a-464c-88f9-d5282d4668d1.jpg?v=1680427445&width=375" h={"149px"} w={"200px"} borderRadius={"15px"} border={"1px solid #426800"} mt={"2px"} loading="lazy" />
                         </Box>
                         <Box h={"200px"}>
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/ficus-moclame-plant-xl-32169671590020.jpg?v=1675560612&width=375" h={"300px"} w={"300px"} borderRadius={"15px"} border={"1px solid #426800"} />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/ficus-moclame-plant-xl-32169671590020.jpg?v=1675560612&width=375" h={"300px"} w={"300px"} borderRadius={"15px"} border={"1px solid #426800"} loading="lazy" />
                         </Box>
                     </Stack>
                     <Box align={"left"} w={["80%", "80%", "50%"]}>
@@ -131,7 +131,7 @@ const Home = () => {
                             {popularProduct && popularProduct.slice(startIndex, startIndex + 5).map((item) => {
                                 return <Link as={ReactRouterLink} textDecoration="none" _hover={{ textDecoration: "none", transform: "scale(0.95)", transition: "all 0.3s ease-in-out" }} to={`products/${item.id}`} key={item.id} w={"90%"} m={"auto"} border={"1px"} borderRadius={"15px"} borderColor={"#426800"} >
                                     <Box bg={"white"} borderRadius={"15px"}>
-                                        <Image src={item.images[0]} w={"100%"} h={300} borderRadius={"15px 15px 0px 0px"} boxShadow={"lg"} />
+                                        <Image src={item.images[0]} w={"100%"} h={300} borderRadius={"15px 15px 0px 0px"} boxShadow={"lg"} loading="lazy" />
                                         <Box boxShadow={"lg"}>
                                             <Text fontSize={"xl"} noOfLines={1}>{item.title}</Text>
                                             <Text fontSize={"md"}>₹{item.price}</Text>
@@ -158,11 +158,11 @@ const Home = () => {
                     </Box>
                     <Stack direction={"row"} w={["80%", "80%", "50%"]}>
                         <Box h={"300px"} w={"200px"} >
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Ivory_3f18466a-68f8-4763-8a18-fe58269b0f6a.jpg?v=1681551837&width=375" h={"149px"} w={"400px"} borderRadius={"15px"} border={"1px solid #426800"} />
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Yellow_6d1a7d77-d759-438d-8f94-ac425f01ea84.jpg?v=1681553821&width=375" h={"149px"} w={"400px"} borderRadius={"15px"} border={"1px solid #426800"} mt={"2px"} />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Ivory_3f18466a-68f8-4763-8a18-fe58269b0f6a.jpg?v=1681551837&width=375" h={"149px"} w={"400px"} borderRadius={"15px"} border={"1px solid #426800"} loading="lazy" />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/Krish12Planter-Yellow_6d1a7d77-d759-438d-8f94-ac425f01ea84.jpg?v=1681553821&width=375" h={"149px"} w={"400px"} borderRadius={"15px"} border={"1px solid #426800"} mt={"2px"} loading="lazy" />
                         </Box>
                         <Box h={"200px"}>
-                            <Image src="https://www.ugaoo.com/cdn/shop/products/wandering-jew-with-hanging-pot-31818367926404.jpg?v=1675629359&width=375" h={"300px"} w={"300px"} borderRadius={"15px"} border={"1px solid #426800"} />
+                            <Image src="https://www.ugaoo.com/cdn/shop/products/wandering-jew-with-hanging-pot-31818367926404.jpg?v=1675629359&width=375" h={"300px"} w={"300px"} borderRadius={"15px"} border={"1px solid #426800"} loading="lazy" />
                         </Box>
                     </Stack>
                 </Stack>
