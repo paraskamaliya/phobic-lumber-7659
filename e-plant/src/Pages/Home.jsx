@@ -80,7 +80,7 @@ const Home = () => {
                         </Button>
                     </VStack>
                     <VStack w={["80%", "80%", "35%"]} h={"100%"} position={"relative"} border={"1px solid #426800"} borderRadius={"15px"}>
-                        <Image src={photos[currPhoto]} style={{ height: "100%", width: "100%", borderRadius: "15px" }} />
+                        <Image loading="lazy" src={photos[currPhoto]} style={{ height: "100%", width: "100%", borderRadius: "15px" }} />
                         <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
                             <CircularProgress value={progress} color="#426800" size="45px">
                                 <CircularProgressLabel>
