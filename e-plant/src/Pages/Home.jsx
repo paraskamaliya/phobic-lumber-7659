@@ -4,10 +4,10 @@ import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import Footer from "../Components/Footer"
 import axios from "axios"
-import plant1 from "../Photos/plant1.webp"
-import plant2 from "../Photos/plant2.webp"
-import plant3 from "../Photos/plant3.webp"
-import plant4 from "../Photos/plant4.webp"
+import plant1 from "../Photos/plant1.jpg"
+import plant2 from "../Photos/plant2.jpg"
+import plant3 from "../Photos/plant3.jpg"
+import plant4 from "../Photos/plant4.jpg"
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
